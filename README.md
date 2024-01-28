@@ -51,7 +51,6 @@ Integrates Next.js, a React framework, for server-side rendering and efficient r
 **Back-End:**
 JavaScript:
 Implements JavaScript for server-side development. This ensures a consistent language across the entire application stack, promoting code reuse and maintainability.
-SQL:
 Utilizes mongoDB for database management. This relational database technology enables efficient storage and retrieval of user profiles, booking details, newsletter subscriptions, blog content, and astrologer information.
 
 **Additional Tools and Libraries:**
