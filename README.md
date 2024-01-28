@@ -14,7 +14,7 @@ In this project, a website dedicated to astrology services is being developed. T
 To enhance user experience and provide personalized services, the website will include a secure login system. Users can create accounts and log in to access exclusive features, view their booking history, and receive customized astrological recommendations based on their profiles.
 
 **Packages Section:**
-The website will feature distinct astrology packages catering to different needs. These packages may include personalized horoscope readings, astrological consultations, and special reports. Users can explore the details of each package to choose the one that aligns with their interests and requirements.An API will be used to process payments.
+The website will feature distinct astrology packages catering to different needs. These packages may include personalized horoscope readings, astrological consultations, and special reports. Users can explore the details of each package to choose the one that aligns with their interests and requirements. An API will be used to process payments.
 
 **Bookings Page:**
 The bookings page will facilitate users in scheduling appointments for astrological consultations or specific services included in the packages. Users can select available time slots, and upon confirmation, the website will generate booking details. A confirmation message will be sent to the user's registered email.
@@ -49,16 +49,18 @@ Next.js:
 Integrates Next.js, a React framework, for server-side rendering and efficient routing. This enhances performance and improves the overall user experience.
 
 **Back-End:**
+
 JavaScript:
 Implements JavaScript for server-side development. This ensures a consistent language across the entire application stack, promoting code reuse and maintainability.
-Utilizes mongoDB for database management. This relational database technology enables efficient storage and retrieval of user profiles, booking details, newsletter subscriptions, blog content, and astrologer information.
+MongoDB: Utilizes mongoDB for database management. This relational database technology enables efficient storage and retrieval of user profiles, booking details, newsletter subscriptions, blog content, and astrologer information.
 
 **Additional Tools and Libraries:**
+
 Bootstrap:
 Incorporates the Bootstrap framework to facilitate the creation of a responsive and mobile-friendly design.
 
-
 **Developing Tools:**
+
 Visual Studio Code:
 Employs Visual Studio Code as the primary code editor for HTML, CSS, and JavaScript development.
 Postman:
