@@ -69,5 +69,4 @@ This working agreement outlines the terms and conditions for the development of 
 **Review and Update:**
 - This working agreement is subject to periodic review. Team members are encouraged to provide feedback, and the agreement may be updated based on evolving project requirements and team experiences.
 
-- 
 **Development Team's Signature: Group 11 Date: 26 January, 2024**
