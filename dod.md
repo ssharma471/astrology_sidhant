@@ -21,6 +21,7 @@
  * @returns {string} Hashed email address
  */
 const hash = (email) => crypto.createHash('sha256').update(email).digest('hex');
+```
 
 ## Dependencies
 - External dependencies or third-party integrations have been validated to ensure correct functionality.
