@@ -1,5 +1,17 @@
 # Working Agreement
 
+**Project Name:** Astrology Services Website
+
+**Date:** 26 January 2024
+
+**Parties Involved:**
+
+- **Client:** Seneca College
+- **Development Team:** Group 11 : Sidhant Sharma, Samarth Patel, Meetsimar Kaur
+
+**Purpose:**
+This working agreement outlines the terms and conditions for the development of the Astrology Services website—a platform dedicated to providing personalized astrological insights. The website aims to revolutionize the way users access astrology services, offering tools for horoscope readings, consultations, and personalized reports. With a focus on creating a user-friendly and comprehensive platform, the objective is to establish a collaborative and efficient working environment, ensuring the successful completion of the project.
+
 ## 1. Preferred Form of Contact and Overall Availability:
 
 **Preferred Communication Channels:**
@@ -56,3 +68,5 @@
 
 **Review and Update:**
 - This working agreement is subject to periodic review. Team members are encouraged to provide feedback, and the agreement may be updated based on evolving project requirements and team experiences.
+
+**Development Team's Signature: Group 11 Date: 26 January, 2024**
