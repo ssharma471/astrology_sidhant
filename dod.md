@@ -1,57 +1,56 @@
 # Definition of Done:
 
-**Acceptance Criteria:** 
-All user story acceptance criteria are met.
+## Acceptance Criteria
+- All acceptance criteria for the user story are met.
 
-**Code Implementation:**  
-The code for the user story is written, reviewed, and will be approved by peer developers.
+## Code Implementation
+- The code for the user story is written, reviewed, and approved by peer developers.
 
-**Unit Testing:** 
-Unit tests for the user story are written and passed successfully.
+## Unit Testing
+- Unit tests for the user story are written and successfully passed.
 
-**Integration Testing:**
-The user story has been integrated with the existing codebase and passes integration tests.
+## Integration Testing
+- The user story has been seamlessly integrated into the existing codebase and passes integration tests.
 
-**Documentation:**
-Any required documentation, such as code comments and user guides, needs to be added.
-For example:
-    - For example:
-    ```javascript
-    /**
-     * @param {string} email user's email address
-     * @returns string Hashed email address
-     */
-    const hash = (email) => crypto.createHash('sha256').update(email).digest('hex');
-    ```
-    
-**Dependencies:**
-External dependencies or third-party integrations are validated to ensure they function correctly.
+## Documentation
+- All necessary documentation, including code comments and user guides, has been added. For example:
 
-**Sprint Goal:** 
-The sprint goal has been accomplished, and all scheduled tasks are completed.
+```javascript
+/**
+ * @param {string} email user's email address
+ * @returns {string} Hashed email address
+ */
+const hash = (email) => crypto.createHash('sha256').update(email).digest('hex');
 
-**Demo:**
-A sprint demo has been executed to present the completed user stories to stakeholders.
+## Dependencies
+- External dependencies or third-party integrations have been validated to ensure correct functionality.
 
-**Review:**
-A sprint review meeting was conducted to collect feedback and implement any necessary adjustments.
+## Sprint Goal
+- The sprint goal has been achieved, and all scheduled tasks are completed.
 
-**Documentation:** 
-Documentation related to the sprint, such as sprint notes and the updated sprint backlog, is kept up-to-date.
+## Demo
+- A sprint demo has been conducted to showcase the completed user stories to stakeholders.
 
-**Continuous Integration:** 
-The entirety of the code is merged into the main branch of the version control system.
+## Review
+- A sprint review meeting was held to gather feedback and implement any necessary adjustments.
 
-**Testing:** 
-Testing is conducted to verify that the work completed during the sprint does not introduce any new issues.
+## Documentation
+- All documentation related to the sprint, such as sprint notes and the updated sprint backlog, is consistently kept up-to-date.
 
-**Deployment:** 
-The tasks completed during the sprint are prepared for deployment to the production environment.
+## Continuous Integration
+- The entire codebase is merged into the main branch of the version control system.
 
-The team collectively agreed upon and accepted the DOD
+## Testing
+- Testing is performed to verify that the work completed during the sprint does not introduce any new issues.
 
-The DOD is prominently displayed in project documentation
+## Deployment
+- The tasks completed during the sprint are prepared for deployment to the production environment.
 
-Subject to periodic review and improvement based on feedback and evolving project requirements
+## Team Agreement
+- The team has collectively agreed upon and accepted the DOD.
 
+## Documentation Display
+- The DOD is prominently displayed in project documentation.
 
+## Periodic Review
+- Subject to periodic review and improvement based on feedback and evolving project requirements.
