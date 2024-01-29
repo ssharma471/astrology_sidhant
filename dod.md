@@ -1,18 +1,18 @@
 # Definition of Done:
 
-# Acceptance Criteria:
+**Acceptance Criteria:** 
 All user story acceptance criteria are met.
 
-# Code Implementation: 
+**Code Implementation:**  
 The code for the user story is written, reviewed, and will be approved by peer developers.
 
-# Unit Testing: 
+**Unit Testing:** 
 Unit tests for the user story are written and passed successfully.
 
-# Integration Testing: 
+**Integration Testing:**
 The user story has been integrated with the existing codebase and passes integration tests.
 
-# Documentation: 
+**Documentation:**
 Any required documentation, such as code comments and user guides, needs to be added.
 For example:
     - For example:
@@ -23,28 +23,28 @@ For example:
      */
     const hash = (email) => crypto.createHash('sha256').update(email).digest('hex');
     ```
-# Dependencies: 
+**Dependencies:**
 External dependencies or third-party integrations are validated to ensure they function correctly.
 
-# Sprint Goal: 
+**Sprint Goal:** 
 The sprint goal has been accomplished, and all scheduled tasks are completed.
 
-# Demo: 
+**Demo:**
 A sprint demo has been executed to present the completed user stories to stakeholders.
 
-# Review: 
+**Review:**
 A sprint review meeting was conducted to collect feedback and implement any necessary adjustments.
 
-# Documentation: 
+**Documentation:** 
 Documentation related to the sprint, such as sprint notes and the updated sprint backlog, is kept up-to-date.
 
-# Continuous Integration: 
+**Continuous Integration:** 
 The entirety of the code is merged into the main branch of the version control system.
 
-# Testing: 
+**Testing:** 
 Testing is conducted to verify that the work completed during the sprint does not introduce any new issues.
 
-# Deployment: 
+**Deployment:** 
 The tasks completed during the sprint are prepared for deployment to the production environment.
 
 The team collectively agreed upon and accepted the DOD
