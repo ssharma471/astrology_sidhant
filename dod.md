@@ -23,6 +23,7 @@ For example:
      */
     const hash = (email) => crypto.createHash('sha256').update(email).digest('hex');
     ```
+    
 **Dependencies:**
 External dependencies or third-party integrations are validated to ensure they function correctly.
 
