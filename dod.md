@@ -13,15 +13,7 @@
 - The user story has been seamlessly integrated into the existing codebase and passes integration tests.
 
 **Documentation**
-- All necessary documentation, including code comments and user guides, has been added. For example:
-
-```javascript
-/**
- * @param {string} email user's email address
- * @returns {string} Hashed email address
- */
-const hash = (email) => crypto.createHash('sha256').update(email).digest('hex');
-```
+- All necessary documentation, including code comments and user guides, has been added.
 
 **Dependencies**
 - External dependencies or third-party integrations have been validated to ensure correct functionality.
