@@ -40,7 +40,7 @@ This working agreement outlines the terms and conditions for the development of 
 - The coding style will follow the camelCase convention.
 
 **Version Control:**
-- Git will be implemented for version control. All code changes must be reviewed by all members before committing to the repository. No direct commits to the main branch; new branches will be created, merged into the main branch, and then deleted.
+- Git will be implemented for version control. All code changes must be reviewed by all members before committing to the repository. No direct commits to the main branch; new branches will be created, merged into the main branch, and then deleted. Code will be merged via PR.
   
 **Documentation:**
 - Code documentation should follow a standardized format, providing clear explanations for improved understanding and future maintenance.
