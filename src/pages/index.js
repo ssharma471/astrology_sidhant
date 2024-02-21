@@ -17,11 +17,10 @@ const Home = () => {
       <main style={styles.mainContent}>
         <h1 style={styles.heading}>Welcome to ASTROLOGY.CA</h1>
         <p style={styles.description}>
-          Explore the amazing features and content we have to offer. Don't have an account?{' '}
+          Explore the amazing features and content we have to offer. Dont have an account?
           <Link href="/register">
             <span style={styles.link}>Sign up here</span>
           </Link>
-          .
         </p>
       </main>
     </div>
