@@ -1,5 +1,6 @@
 // pages/_app.js
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App({ Component, pageProps }) {
   return <Component {...pageProps} />;
