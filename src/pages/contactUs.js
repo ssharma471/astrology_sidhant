@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const ContactUs = () => {
@@ -15,10 +16,10 @@ const ContactUs = () => {
       <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link" href="/about">About</Link>
+            <Link className="nav-link" href="/about">About Us</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="/contactUs">Contact</Link>
+            <Link className="nav-link" href="/contactUs">Contact Us</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" href="/services">Our Services</Link>
