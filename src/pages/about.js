@@ -5,23 +5,23 @@ const About = () => {
     <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
-    <a className="navbar-brand" href="/dashboard">
+    <Link className="navbar-brand" href="/dashboard">
         <img src="/logo.jpeg" alt="Logo" width="30" height="30" className="d-inline-block align-top" />
         Astrology
-      </a>
+      </Link>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="/about">About</a>
+            <Link className="nav-link" href="/about">About</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/contactUs">Contact</a>
+            <Link className="nav-link" href="/contactUs">Contact</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/services">Our Services</a>
+            <Link className="nav-link" href="/services">Our Services</Link>
           </li>
         </ul>
       </div>
