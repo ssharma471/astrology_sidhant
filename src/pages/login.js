@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { setToken } from '../lib/tokenfunc'
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -23,6 +24,9 @@ const Login = () => {
 
       // Check if login was successful based on response status
       if (response.ok) {
+        const resp = await response.json();
+        console.log(resp);
+        setToken(resp.token);
         router.push('/dashboard'); // Redirect to dashboard if authentication is successful
       } else {
         console.error('Error logging in user:', response.statusText);

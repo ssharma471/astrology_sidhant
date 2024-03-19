@@ -1,5 +1,6 @@
 // pages/api/login.js
 const { connect, checkUser } = require("../../../user-api/mongodb"); // Import mongodb.js functions
+import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -8,7 +9,15 @@ export default async function handler(req, res) {
       const { email, password } = req.body;
       const user = await checkUser(email, password);
       if (user) {
-        res.json({ success: true });
+        const tokenData = {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+        };
+        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET);
+
+        //console.log({ user, token });
+        res.json({ success: true, message: "Login Successfull", token: token });
       } else {
         res
           .status(401)
