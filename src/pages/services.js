@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import Link from 'next/link';
+import Image from 'next/image'; // Import Image component from next/image
 
 const Services = () => {
   // Array of random astrology services
@@ -21,7 +22,7 @@ const Services = () => {
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
     <Link className="navbar-brand" href="/dashboard">
-        <img src="/logo.jpeg" alt="Logo" width="30" height="30" className="d-inline-block align-top" />
+        <Image src="/logo.jpeg" alt="Logo" width="30" height="30" className="d-inline-block align-top" />
         Astrology
       </Link>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image'; // Import Image component from next/image
+
 
 const About = () => {
   return (
@@ -7,7 +9,7 @@ const About = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
     <Link className="navbar-brand" href="/dashboard">
-        <img src="/logo.jpeg" alt="Logo" width="30" height="30" className="d-inline-block align-top" />
+        <Image src="/logo.jpeg" alt="Logo" width="30" height="30" className="d-inline-block align-top" />
         Astrology
       </Link>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,9 +33,9 @@ const About = () => {
   
     <div className="container">
       <h2>About Us</h2>
-      <p>Welcome to our Astrology Portal. We are dedicated to providing you with accurate astrological insights and guidance to navigate through life's challenges.</p>
+      <p>Welcome to our Astrology Portal. We are dedicated to providing you with accurate astrological insights and guidance to navigate through life&apos;s challenges.</p>
       <p>Our team of experienced astrologers combines ancient wisdom with modern techniques to offer personalized readings and forecasts tailored to your needs.</p>
-      <p>Whether you're seeking answers about love, career, or personal growth, our astrologers are here to help you unlock the secrets of the cosmos.</p>
+      <p>Whether you&apos;re seeking answers about love, career, or personal growth, our astrologers are here to help you unlock the secrets of the cosmos.</p>
       <p>Explore our site to discover horoscopes, compatibility reports, and insightful articles on astrology. Let the stars guide you on your journey to self-discovery and fulfillment.</p>
 
       <style jsx>{`
