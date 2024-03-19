@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../public/logo.jpeg'; // Import your logo image
+import Link from 'next/link';
 
 const Dashboard = () => {
   return (
@@ -8,23 +9,23 @@ const Dashboard = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <a className="navbar-brand" href="/dashboard">
+          <Link className="navbar-brand" href="/dashboard">
             <img src="/logo.jpeg" alt="Logo" width="30" height="30" className="d-inline-block align-top" />
             Astrology
-          </a>
+          </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="/about">About</a>
+                <Link className="nav-link" href="/about">About</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/contactUs">Contact</a>
+                <Link className="nav-link" href="/contactUs">Contact</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/services">Our Services</a>
+                <Link className="nav-link" href="/services">Our Services</Link>
               </li>
             </ul>
           </div>
@@ -39,7 +40,7 @@ const Dashboard = () => {
           <p className="lead">Explore the mysteries of the universe with our astrology services.</p>
           <hr className="my-4" />
           <p>Get personalized readings, predictions, and consultations from our expert astrologers.</p>
-          <a className="btn btn-primary btn-lg" href="/services" role="button">Explore Services</a>
+          <Link className="btn btn-primary btn-lg" href="/services" role="button">Explore Services</Link>
         </div>
 
         {/* About Section */}
@@ -48,7 +49,7 @@ const Dashboard = () => {
             <div className="col-md-6">
               <h2>About Us</h2>
               <p>Learn more about our mission, vision, and team behind Astrology World.</p>
-              <a className="btn btn-outline-primary" href="/about" role="button">Read More</a>
+              <Link className="btn btn-outline-primary" href="/about" role="button">Read More</Link>
             </div>
             <div className="col-md-6">
               {/* <img src="/about-image.jpg" alt="About Us" className="img-fluid rounded" /> */}
@@ -65,7 +66,7 @@ const Dashboard = () => {
             <div className="col-md-6">
               <h2>Contact Us</h2>
               <p>Have any questions or queries? Feel free to reach out to us.</p>
-              <a className="btn btn-outline-primary" href="/contactUs" role="button">Contact Now</a>
+              <Link className="btn btn-outline-primary" href="/contactUs" role="button">Contact Now</Link>
             </div>
           </div>
         </section>
