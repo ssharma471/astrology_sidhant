@@ -2,7 +2,7 @@
 |------------------|------------------------|-----------------|----------------------------------|
 | Sidhant Sharma   | Front-End Dev          | ssharma471      | ssharma471@myseneca.ca.          |
 | Samarth Modi     | Back-End Dev           | Samarth-Modi    | sdmodi@myseneca.ca               |
-| MeetSimar        | Database               | meetsimar       | meetsimar-kaur1@myseneca.ca      |
+| Meetsimar Kaur   | Database               | meetsimar       | meetsimar-kaur1@myseneca.ca      |
 
 **Project Description**
 
