@@ -2,6 +2,7 @@
 const express = require('express');
 const next = require('next');
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcryptjs');
 const { connect, registerUser, checkUser } = require('./user-api/mongodb'); // Import mongodb.js functions
 
 require('dotenv').config();
@@ -21,16 +22,32 @@ app.prepare().then(() => {
   // Connect to MongoDB
   connect(); // Call connect function from mongodb.js
 
+  // Function to check if password meets criteria
+  function validatePassword(password) {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-_+=|\\{}[\]:;"'<>,.?/]).{8,}$/;
+    return passwordRegex.test(password);
+  }
+
   // Handle user registration endpoint
   server.post('/api/register', async (req, res) => {
     try {
       const { name, email, password } = req.body;
+
+      // Check if password meets criteria
+      if (!validatePassword(password)) {
+        return res.status(400).json({ error: 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*()-_+=|\\{}[\]:;"\'<>,.?/)' });
+      }
+
       // Call registerUser function from mongodb.js to register user
       await registerUser({ name, email, password });
       res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-      console.error('Error registering user:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      if (error.message.includes('duplicate key error')) {
+        res.status(400).json({ error: 'Email already exists. Please use a different email.' });
+      } else {
+        console.error('Error registering user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
     }
   });
 
@@ -39,13 +56,22 @@ app.prepare().then(() => {
     try {
       const { email, password } = req.body;
       // Call checkUser function from mongodb.js to check user credentials
-      console.log(email, password)
       const user = await checkUser(email, password);
-      if (user) {
-        res.json({ success: true });
-      } else {
+
+      // Check if user is found
+      if (!user) {
         res.status(401).json({ success: false, message: 'Invalid email or password' });
+        return;
       }
+
+      // Check if password matches
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        res.status(401).json({ success: false, message: 'Invalid email or password' });
+        return;
+      }
+
+      res.json({ success: true });
     } catch (error) {
       console.error('Error logging in user:', error);
       res.status(500).json({ error: 'Internal server error' });

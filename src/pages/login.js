@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { setToken } from '../lib/tokenfunc'
+import { setToken } from '../lib/tokenfunc';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const router = useRouter();
 
   async function handleLogin(e) {
@@ -21,7 +22,7 @@ const Login = () => {
           password: password
         })
       });
-
+  
       // Check if login was successful based on response status
       if (response.ok) {
         const resp = await response.json();
@@ -29,16 +30,26 @@ const Login = () => {
         setToken(resp.token);
         router.push('/dashboard'); // Redirect to dashboard if authentication is successful
       } else {
-        console.error('Error logging in user:', response.statusText);
+        const errorResponse = await response.json();
+        if (errorResponse.error === 'Invalid password') {
+          setError('Incorrect password. Please try again.');
+        } else if (errorResponse.error === 'User not found') {
+          setError('User not found. Please check your credentials.');
+        } else {
+          setError('Login failed. Please try again.');
+        }
       }
     } catch (error) {
       console.error('Error logging in user:', error.message);
+      setError('An error occurred, please try again later');
     }
   }
+  
 
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Login Page</h1>
+      {error && <p style={styles.error}>{error}</p>}
       <form style={styles.form}>
         <label style={styles.label}>
           Email:
@@ -98,6 +109,10 @@ const styles = {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
+  },
+  error: {
+    color: 'red',
+    marginBottom: '10px',
   },
 };
 

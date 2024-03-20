@@ -5,32 +5,50 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+
+  // Password regex for validation
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-_+=|\\{}[\]:;"'<>,.?/]).{8,}$/;
 
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (!password || !confirmPassword) {
+      setError('Password fields cannot be empty.');
+      return;
+    }
+
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-    } else {
-      try {
-        const response = await fetch('/api/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password,
-          }),
-        });
-        if (response.ok) {
-          console.log('User registered successfully');
-          window.location = '/'; // Redirect to the home page after successful registration
-        } else {
-          console.error('Error registering user:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error registering user:', error);
+      setError('Passwords do not match.');
+      return;
+    }
+
+    if (!passwordRegex.test(password)) {
+      setError('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*()-_+=|\\{}[]:;"\'<>,.?/)');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('User registered successfully');
+        window.location = '/'; // Redirect to the home page after successful registration
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || 'Error registering user.');
       }
+    } catch (error) {
+      console.error('Error registering user:', error);
+      setError('Error registering user.');
     }
   }
 
@@ -63,6 +81,7 @@ const Register = () => {
           />
         </label>
         <br />
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit" style={styles.button}>
           Register
         </button>
