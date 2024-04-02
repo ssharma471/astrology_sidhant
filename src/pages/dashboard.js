@@ -71,7 +71,7 @@ const Dashboard = () => {
             <h2>Astrology Insights</h2>
             <p>Unlock the secrets of the stars and explore your astrological destiny.</p>
             <p>Discover how planetary alignments influence your life and relationships.</p>
-            <p>Get insights into your zodiac sign's personality traits and compatibility.</p>
+            <p>Get insights into your zodiac signs personality traits and compatibility.</p>
             <button className="btn btn-primary">Explore Astrology</button>
           </div>
         </section>
