@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image'; // Import Image component from next/image
+import Image from 'next/image'; 
 
 const Services = () => {
   // Array of random astrology services
@@ -19,53 +19,45 @@ const Services = () => {
 
   return (
     <div>
-          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div className="container">
-    <Link className="navbar-brand" href="/dashboard">
-        <Image src="/logo.jpeg" alt="Logo" width="30" height="30" className="d-inline-block align-top" />
-        Astrology
-      </Link>
-      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link className="nav-link" href="/about">About</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" href="/contactUs">Contact</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" href="/services">Our Services</Link>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+ <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          <Link className="navbar-brand" href="/dashboard">
+            <Image src="/logo.jpeg" alt="Logo" width={30} height={30} className="d-inline-block align-top" />
+            <span className="ms-2">Astrology</span>
+          </Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link className="nav-link" href="/about">About Us</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/contactUs">Contact Us</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/services">Our Services</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <div className="container">
         <h2 className="page-title">Our Astrology Services</h2>
         <div className="services-grid">
           {astrologyServices.map((service, index) => (
-            <div key={index} className="service-item">
-              <img src={service.image} alt={service.name} className="service-image" />
-              <h3 className="service-name">{service.name}</h3>
-              <p className="service-price">{service.price}</p>
-            </div>
+            <Link href={`/service/${encodeURIComponent(service.name.replace(/\s/g, ''))}`} key={index}>
+              <legacyBehavior className="service-item">
+                <img src={service.image} alt={service.name} className="service-image" />
+                <h3 className="service-name">{service.name}</h3>
+                <p className="service-price">{service.price}</p>
+              </legacyBehavior>
+            </Link>
           ))}
         </div>
       </div>
       <style jsx>{`
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
-        }
-        .page-title {
-          font-size: 32px;
-          text-align: center;
-          margin-bottom: 40px;
-        }
         .services-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -77,6 +69,11 @@ const Services = () => {
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
           padding: 20px;
           text-align: center;
+          display: block;
+          text-decoration: none;
+        }
+        .service-item:hover {
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         .service-image {
           width: 100%;
@@ -93,6 +90,9 @@ const Services = () => {
           margin-top: 10px;
         }
       `}</style>
+      <footer className="bg-dark text-white text-center py-4">
+        <p>&copy; 2024 Astrology World. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 };
