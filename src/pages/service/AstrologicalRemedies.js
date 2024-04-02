@@ -41,9 +41,9 @@ const AstrologicalRemedies = () => {
                 <h5 className="card-title">Astrological Remedies </h5>
                 <p className="card-text">Description about Astrological Remedies Readings goes here.</p>
                 <p className="card-text">Discover the dynamics of your relationships with Astrological Compatibility Analysis. Our expert astrologers analyze the alignment of celestial bodies to provide insights into the compatibility between you and your partner.</p>
-                <p className="card-text">Uncover potential challenges and strengths in your relationship, and gain a deeper understanding of each other's personalities and needs.</p>
-                <p className="card-text">Whether you're seeking clarity on love, career, or personal growth, our Tarot Card Readings offer valuable perspectives and empower you to make informed decisions.</p>
-                <p className="card-text">Whether you're seeking clarity on love, career, or personal growth, our Tarot Card Readings offer valuable perspectives and empower you to make informed decisions.</p>
+                <p className="card-text">Uncover potential challenges and strengths in your relationship, and gain a deeper understanding of each other&apos;s personalities and needs.</p>
+                <p className="card-text">Whether you&apos;re seeking clarity on love, career, or personal growth, our Tarot Card Readings offer valuable perspectives and empower you to make informed decisions.</p>
+                <p className="card-text">Whether you&apos;re seeking clarity on love, career, or personal growth, our Tarot Card Readings offer valuable perspectives and empower you to make informed decisions.</p>
 
               
                 <Link href="/service/astrological-compatibility-analysis-details">
