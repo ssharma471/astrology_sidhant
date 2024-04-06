@@ -1,23 +1,51 @@
+// src/pages/YourCart.js
+
 import React from 'react';
+import { useAtom } from 'jotai';
+import { cartState } from 'store';
 import Link from 'next/link';
 import Image from 'next/image';
-import YourCart,{ useCart } from './yourCart'; // Import the custom hook
 
-const Services = () => {
-  const astrologyServices = [
-    { name: "Natal Chart Readings", price: "$50", image: "/Natal Chart Readings.jpeg"  },
-    { name: "Tarot Card Readings", price: "$30", image: "/Tarot Card Readings.jpeg" },
-    { name: "Horoscope Predictions", price: "$40", image: "/Horoscope Predictions.jpg" },
-    { name: "Astrological Compatibility Analysis", price: "$60", image: "/Astrological Compatibility Analysis.jpeg" },
-    { name: "Past Life Regression", price: "$70", image: "/Past Life Regression.jpeg" },
-    { name: "Dream Interpretation", price: "$45", image: "/Dream Interpretation.png" },
-    { name: "Chakra Balancing", price: "$55", image: "/Chakra Balancing.jpeg" },
-    { name: "Crystal Healing", price: "$75", image: "/Crystal Healing.jpeg" },
-    { name: "Numerology Consultations", price: "$65", image: "/Numerology Consultations.png" },
-    { name: "Astrological Remedies", price: "$80", image: "/Astrological Remedies.jpeg" }
-  ];
+// Custom hook for managing cart operations
+const useCart = () => {
+  const [cart, setCart] = useAtom(cartState);
 
-  const { addToCart } = useCart(); // Use the addToCart function from the custom hook
+  const addToCart = (service) => {
+    const isInCart = cart.some((item) => item.name === service.name);
+
+    if (!isInCart) {
+      setCart([...cart, service]);
+      alert(`${service.name} added to cart!`);
+    } else {
+      alert(`${service.name} is already in the cart!`);
+    }
+  };
+
+  const removeFromCart = (service) => {
+    const updatedCart = cart.filter((item) => item.name !== service.name);
+    setCart(updatedCart);
+    alert(`${service.name} removed from cart!`);
+  };
+
+  return {
+    cart,
+    addToCart,
+    removeFromCart,
+  };
+};
+
+const YourCart = () => {
+  const { cart, removeFromCart } = useCart();
+
+  // Array of cart items
+  const cartItems = cart.map((item, index) => (
+    {
+      id: index,
+      name: item.name,
+      price: item.price,
+      image: item.image,
+    }
+  ));
 
   return (
     <div>
@@ -59,32 +87,31 @@ const Services = () => {
           </div>
         </div>
       </nav>
-      <div className="container">
-        <h2 className="page-title">Our Astrology Services</h2>
+      <h2>Your Cart</h2>
+      {cart.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
         <div className="services-grid">
-          {astrologyServices.map((service, index) => (
-            <div className="service-item" key={index}>
-              <Link href={`/service/${encodeURIComponent(service.name.replace(/\s/g, ''))}`} legacyBehavior>
-                <a>
-                  <Image src={service.image} alt={service.name} className="service-image" width={200} height={200} />
-                  <h3 className="service-name">{service.name}</h3>
-                  <p className="service-price">{service.price}</p>
-                </a>
-              </Link>
-              {/* Add to Cart button */}
-              <button onClick={() => addToCart(service)}>Add to Cart</button>
+          {cartItems.map((item) => (
+            <div className="service-item" key={item.id}>
+              <div className="image-container">
+                <Image src={item.image} alt={item.name} width={200} height={200} layout="responsive" />
+              </div>
+              <h3 className="service-name">{item.name}</h3>
+              <p className="service-price">{item.price}</p>
+              <button onClick={() => removeFromCart(item)}>Remove</button>
             </div>
           ))}
         </div>
-        {/* Render the YourCart component */}
-        <YourCart />
-      </div>
+      )}
       {/* Styles */}
       <style jsx>{`
         .services-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          grid-gap: 20px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          gap: 20px;
+          padding: 20px;
         }
         .service-item {
           background-color: #fff;
@@ -92,16 +119,22 @@ const Services = () => {
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
           padding: 20px;
           text-align: center;
-          display: block;
           text-decoration: none;
+          width: 200px;
+        }
+        .image-container {
+          width: 100%;
+          height: 200px; /* Set a fixed height for the image container */
+          overflow: hidden;
+          border-radius: 8px;
+        }
+        .image-container img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
         }
         .service-item:hover {
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .service-image {
-          width: 100%;
-          height: auto;
-          border-radius: 8px;
         }
         .service-name {
           font-size: 18px;
@@ -113,11 +146,10 @@ const Services = () => {
           margin-top: 10px;
         }
       `}</style>
-      <footer className="bg-dark text-white text-center py-4">
-        <p>&copy; 2024 Astrology World. All Rights Reserved.</p>
-      </footer>
     </div>
   );
 };
 
-export default Services;
+export default YourCart;
+
+export { useCart }; // Export the custom hook

@@ -1,16 +1,17 @@
-import React from 'react'
+// src/pages/UserProfile.js
+
+import React from 'react';
+import PrivateRoute from 'components/PrivateRoute'; // Import PrivateRoute
 
 const UserProfile = () => {
   return (
-<>
-<div style={{fontSize:40, textAlign:"center", color:"red"}}>
-    This is the User Profile Page which has not been set up yet
-</div>
-<span style={{fontSize:40, color:"red",display:"flex", justifyContent:"center"}}>
-    Stay tunned !!! We will get right back
-</span>
-</>
-  )
-}
+    <PrivateRoute>
+      <div>
+        <h2>User Profile</h2>
+        {/* Your profile content goes here */}
+      </div>
+    </PrivateRoute>
+  );
+};
 
-export default UserProfile
+export default UserProfile;

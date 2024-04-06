@@ -27,6 +27,9 @@ const Dashboard = () => {
               <li className="nav-item">
                 <Link className="nav-link" href="/services">Our Services</Link>
               </li>
+              <li className='nav-item'>
+                <Link className='nav-link' href="/yourCart">View Cart</Link>
+              </li>
             </ul>
           </div>
         </div>
