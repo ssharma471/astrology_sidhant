@@ -27,7 +27,8 @@ const Dashboard = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const fetchAndUpdateUserInfo = async () => {
+
+  const handleProfileUpdate = async () => {
     try {
       const response = await fetch('/api/get-user-info');
       console.log(response)
@@ -41,11 +42,6 @@ const Dashboard = () => {
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
-  };
-
-  const handleProfileUpdate = async () => {
-    // Fetch updated user info from the server
-    await fetchAndUpdateUserInfo();
   };
 
   return (
