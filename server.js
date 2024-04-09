@@ -78,6 +78,26 @@ app.prepare().then(() => {
     }
   });
 
+  // Handle updating user profile endpoint
+  server.put('/api/update-profile', async (req, res) => {
+    try {
+      const { userId, updatedUserData } = req.body;
+
+      // Check if userId and updatedUserData are provided
+      if (!userId || !updatedUserData) {
+        return res.status(400).json({ success: false, message: "userId and updatedUserData are required" });
+      }
+
+      // Update user's profile information
+      await updateUserInfo(userId, updatedUserData);
+
+      res.json({ success: true, message: "Profile updated successfully" });
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
   // For all other routes, let Next.js handle them
   server.all('*', (req, res) => {
     return handle(req, res);
