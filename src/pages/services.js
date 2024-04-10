@@ -52,7 +52,7 @@ const Services = () => {
               </li>
               <li className="nav-item">
                 <Link href="/yourCart" legacyBehavior>
-                  <a className="nav-link">View Cart</a>
+                  <a className="nav-link">View Favourites</a>
                 </Link>
               </li>
             </ul>
@@ -72,7 +72,7 @@ const Services = () => {
                 </a>
               </Link>
               {/* Add to Cart button */}
-              <button onClick={() => addToCart(service)}>Add to Cart</button>
+              <button onClick={() => addToCart(service)}>Add to Favourites</button>
             </div>
           ))}
         </div>

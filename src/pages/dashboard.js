@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { readToken, removeToken } from "../../src/lib/tokenfunc";
+import { readToken , removeToken} from "@/lib/tokenfunc"; 
 import { useRouter } from "next/router";
 
 const Dashboard = () => {
@@ -20,44 +20,31 @@ const Dashboard = () => {
   const handleLogout = () => {
     // Remove token from localStorage
     removeToken();
-    router.push("/login");
+    router.push("/");
   };
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-
-  const handleProfileUpdate = async () => {
-    try {
-      const response = await fetch('/api/get-user-info');
-      console.log(response)
-      const data = await response.json();
-      console.log(data)
-      if (response.ok) {
-        setUsername(data.name);
-      } else {
-        throw new Error(data.error || "Failed to fetch user info");
-      }
-    } catch (error) {
-      console.error("Error fetching user info:", error);
-    }
-  };
+  const isLoggedIn = username !== null;
 
   return (
     <div>
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <Link className="navbar-brand" href="/dashboard">
-            <Image
-              src="/logo.jpeg"
-              alt="Logo"
-              width={30}
-              height={30}
-              className="d-inline-block align-top"
-            />
-            <span className="ms-2">Astrology</span>
+          <Link href="/dashboard" legacyBehavior>
+            <a className="navbar-brand">
+              <Image
+                src="/logo.jpeg"
+                alt="Logo"
+                width={30}
+                height={30}
+                className="d-inline-block align-top"
+              />
+              <span className="ms-2">Astrology</span>
+            </a>
           </Link>
           <button
             className="navbar-toggler"
@@ -76,88 +63,66 @@ const Dashboard = () => {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" href="/about">
-                  About Us
+                <Link href="/about" legacyBehavior>
+                  <a className="nav-link">About Us</a>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/contactUs">
-                  Contact Us
+                <Link href="/contactUs" legacyBehavior>
+                  <a className="nav-link">Contact Us</a>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/services">
-                  Our Services
-                </Link>
+                {isLoggedIn ? (
+                  <Link href="/services" legacyBehavior>
+                    <a className="nav-link">Our Services</a>
+                  </Link>
+                ) : (
+                  <Link href="/" legacyBehavior>
+                    <a className="nav-link">Our Services</a>
+                  </Link>
+                )}
               </li>
-{username && (
-
-                <li className="nav-item dropdown" onClick={toggleDropdown}>
-
-                  <div
-
-                    className={`nav-link dropdown-toggle ${
-
-                      dropdownOpen ? "show" : ""
-
-                    }`}
-
-                    id="navbarDropdown"
-
-                    role="button"
-
-                    aria-expanded={dropdownOpen ? "true" : "false"}
-
-                  >
-
-                    {username}
-
-                  </div>
-
-                  <ul
-
-                    className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}
-
-                    aria-labelledby="navbarDropdown"
-
-                  >
-
-                    <li>
-
-                      <Link href="/edit-profile">
-
-                        <div
-
+              {isLoggedIn && (
+                <>
+                  <li className="nav-item dropdown" onClick={toggleDropdown}>
+                    <a
+                      className={`nav-link dropdown-toggle ${
+                        dropdownOpen ? "show" : ""
+                      }`}
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      aria-expanded={dropdownOpen ? "true" : "false"}
+                    >
+                      {username}
+                    </a>
+                    <ul
+                      className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <li>
+                        <Link href="/edit-profile" legacyBehavior>
+                          <a className="dropdown-item">Edit Profile</a>
+                        </Link>
+                      </li>
+                      <li>
+                        <button
                           className="dropdown-item"
-
-                          style={{ textDecoration: "none" }}
-
-                          onClick={handleProfileUpdate} // Call handleProfileUpdate on profile edit
-
+                          onClick={handleLogout}
                         >
-
-                          Edit Profile
-
-                        </div>
-
-                      </Link>
-
-                    </li>
-
-                    <li>
-
-                      <button className="dropdown-item" onClick={handleLogout}>
-
-                        Logout
-
-                      </button>
-
-                    </li>
-
-                  </ul>
-
-                </li>
-
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                  {/* Only show if logged in */}
+                  <li className="nav-item">
+                    <Link href="/yourCart" legacyBehavior>
+                      <a className="nav-link">Your Cart</a>
+                    </Link>
+                  </li>
+                </>
               )}
             </ul>
           </div>
@@ -182,11 +147,19 @@ const Dashboard = () => {
               Get personalized readings, predictions, and consultations from our
               expert astrologers.
             </p>
-            <Link href="/services">
-              <button className="btn btn-primary btn-lg">
-                Explore Our Services
-              </button>
-            </Link>
+            {isLoggedIn ? (
+              <Link href="/services" legacyBehavior>
+                <a className="btn btn-primary btn-lg">
+                  Explore Our Services
+                </a>
+              </Link>
+            ) : (
+              <Link href="/" legacyBehavior>
+                <a className="btn btn-primary btn-lg">
+                  Explore Our Services
+                </a>
+              </Link>
+            )}
           </div>
         </div>
 
@@ -199,12 +172,17 @@ const Dashboard = () => {
                 Learn more about our mission, vision, and team behind Astrology
                 World.
               </p>
-              <Link href="/about">
-                <button className="btn btn-outline-primary">Read More</button>
+              <Link href="/about" legacyBehavior>
+                <a className="btn btn-outline-primary">Read More</a>
               </Link>
             </div>
             <div className="col-md-6">
-              <Image src="/about.png" alt="About Us" width={500} height={300} />
+              <Image
+                src="/about.png"
+                alt="About Us"
+                width={500}
+                height={300}
+              />
             </div>
           </div>
         </section>
@@ -225,7 +203,15 @@ const Dashboard = () => {
               Get insights into your zodiac signs personality traits and
               compatibility.
             </p>
-            <button className="btn btn-primary">Explore Astrology</button>
+            {isLoggedIn ? (
+              <Link href="/edit-profile" legacyBehavior>
+                <a className="btn btn-primary">Edit Profile</a>
+              </Link>
+            ) : (
+              <Link href="/" legacyBehavior>
+                <a className="btn btn-primary">Edit Profile</a>
+              </Link>
+            )}
           </div>
         </section>
 
@@ -244,8 +230,8 @@ const Dashboard = () => {
               <p>
                 Have any questions or queries? Feel free to reach out to us.
               </p>
-              <Link href="/contactUs">
-                <button className="btn btn-outline-primary">Contact Now</button>
+              <Link href="/contactUs" legacyBehavior>
+                <a className="btn btn-outline-primary">Contact Now</a>
               </Link>
             </div>
           </div>
