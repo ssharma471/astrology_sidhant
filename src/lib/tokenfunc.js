@@ -10,7 +10,6 @@ export function getToken() {
 
 export function readToken() {
   const token = getToken();
-  console.log(jwt_decode(token))
   return token ? jwt_decode(token) : null;
 }
 

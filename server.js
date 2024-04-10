@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const next = require('next');
 const { MongoClient } = require('mongodb');
@@ -98,6 +97,30 @@ app.prepare().then(() => {
     }
   });
   
+  // Redirect root URL (/) to /dashboard
+  server.get('/', (req, res) => {
+    res.redirect('/dashboard');
+  });
+
+  // For accessing /service and /edit-person, check if user is logged in
+  server.get('/service', (req, res, next) => {
+    const { loggedIn } = req.query; // Check if user is logged in
+    if (!loggedIn) {
+      res.redirect('/');
+    } else {
+      return next();
+    }
+  });
+
+  server.get('/edit-person', (req, res, next) => {
+    const { loggedIn } = req.query; // Check if user is logged in
+    if (!loggedIn) {
+      res.redirect('/');
+    } else {
+      return next();
+    }
+  });
+
   // For all other routes, let Next.js handle them
   server.all('*', (req, res) => {
     return handle(req, res);

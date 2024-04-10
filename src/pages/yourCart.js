@@ -15,16 +15,16 @@ const useCart = () => {
 
     if (!isInCart) {
       setCart([...cart, service]);
-      alert(`${service.name} added to cart!`);
+      alert(`${service.name} added to favourites!`);
     } else {
-      alert(`${service.name} is already in the cart!`);
+      alert(`${service.name} is already in favourites!`);
     }
   };
 
   const removeFromCart = (service) => {
     const updatedCart = cart.filter((item) => item.name !== service.name);
     setCart(updatedCart);
-    alert(`${service.name} removed from cart!`);
+    alert(`${service.name} removed from favourites!`);
   };
 
   return {
@@ -80,7 +80,7 @@ const YourCart = () => {
               </li>
               <li className="nav-item">
                 <Link href="/yourCart" legacyBehavior>
-                  <a className="nav-link">View Cart</a>
+                  <a className="nav-link">View Favourites</a>
                 </Link>
               </li>
             </ul>

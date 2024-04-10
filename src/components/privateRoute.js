@@ -1,22 +1,11 @@
-// src/components/PrivateRoute.js
+/* import { useEffect } from "react";
+import { useAtom } from "jotai";
+import { cartState } from "store";
+import { getcart } from "@/lib/userData";
 
-import React from 'react';
-import { useRouter } from 'next/router';
-import { useAtom } from 'jotai';
-/* import { userState } from 'store'; */
-import { addCart } from 'store';
 
-const PrivateRoute = ({ children }) => {
-  const router = useRouter();
-  const [user] = useAtom(addCart);
+export default function privaterRoute = () => 
+{
 
-  React.useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    }
-  }, [user, router]);
-
-  return <>{children}</>;
-};
-
-export default PrivateRoute;
+}
+ */
