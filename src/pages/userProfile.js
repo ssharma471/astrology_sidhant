@@ -1,16 +1,15 @@
-import React from 'react'
+// src/pages/UserProfile.js
+
+import React from 'react';
+
 
 const UserProfile = () => {
   return (
-<>
-<div style={{fontSize:40, textAlign:"center", color:"red"}}>
-    This is the User Profile Page which has not been set up yet
-</div>
-<span style={{fontSize:40, color:"red",display:"flex", justifyContent:"center"}}>
-    Stay tunned !!! We will get right back
-</span>
-</>
-  )
-}
+      <div>
+        <h2>User Profile</h2>
+        {/* Your profile content goes here */}
+      </div>
+  );
+};
 
-export default UserProfile
+export default UserProfile;

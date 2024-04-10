@@ -90,41 +90,7 @@ const Dashboard = () => {
                   Our Services
                 </Link>
               </li>
-              {username && (
-                <li className="nav-item dropdown" onClick={toggleDropdown}>
-                  <div
-                    className={`nav-link dropdown-toggle ${
-                      dropdownOpen ? "show" : ""
-                    }`}
-                    id="navbarDropdown"
-                    role="button"
-                    aria-expanded={dropdownOpen ? "true" : "false"}
-                  >
-                    {username}
-                  </div>
-                  <ul
-                    className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <li>
-                      <Link href="/edit-profile">
-                        <div
-                          className="dropdown-item"
-                          style={{ textDecoration: "none" }}
-                          onClick={handleProfileUpdate} // Call handleProfileUpdate on profile edit
-                        >
-                          Edit Profile
-                        </div>
-                      </Link>
-                    </li>
-                    <li>
-                      <button className="dropdown-item" onClick={handleLogout}>
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </li>
-              )}
+
             </ul>
           </div>
         </div>

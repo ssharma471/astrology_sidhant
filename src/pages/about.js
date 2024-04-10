@@ -56,6 +56,11 @@ const About = () => {
           <li className="nav-item">
             <Link className="nav-link" href="/services">Our Services</Link>
           </li>
+          <li className="nav-item">
+                <Link href="/yourCart" legacyBehavior>
+                  <a className="nav-link">View Cart</a>
+                </Link>
+              </li>
         </ul>
       </div>
     </div>
