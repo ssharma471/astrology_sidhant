@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { readToken, removeToken } from "@/lib/tokenfunc";
 import { useRouter } from "next/router";
+import Script from 'next/script'; // Import the Script component to handle external scripts properly
 
-<script src={`https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places`}></script>
 
 const ContactUs = () => {
   const router = useRouter();
@@ -31,7 +31,10 @@ const ContactUs = () => {
 
   return (
     <>
-    
+<Script
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"
+        strategy="afterInteractive"
+      />
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div className="container">

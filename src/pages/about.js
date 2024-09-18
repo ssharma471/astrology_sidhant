@@ -112,7 +112,7 @@ const About = () => {
       <HeroSection>
         <HeroTitle>About Us</HeroTitle>
         <HeroSubtitle>
-          Welcome to our Astrology Portal. We are dedicated to providing you with accurate astrological insights and guidance to navigate through life's challenges.
+          Welcome to our Astrology Portal. We are dedicated to providing you with accurate astrological insights and guidance to navigate through lifes challenges.
         </HeroSubtitle>
       </HeroSection>
 
@@ -120,7 +120,7 @@ const About = () => {
         <div className="text-center mb-5">
           <h2 className="mb-4">Our Mission</h2>
           <p>
-            Our team of experienced astrologers combines ancient wisdom with modern techniques to offer personalized readings and forecasts tailored to your needs. Whether you're seeking answers about love, career, or personal growth, we are here to help you unlock the secrets of the cosmos.
+            Our team of experienced astrologers combines ancient wisdom with modern techniques to offer personalized readings and forecasts tailored to your needs. Whether youre seeking answers about love, career, or personal growth, we are here to help you unlock the secrets of the cosmos.
           </p>
         </div>
 
