@@ -2,7 +2,7 @@ const express = require('express');
 const next = require('next');
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
-const { connect, registerUser, checkUser } = require('./user-api/mongodb'); // Import mongodb.js functions
+const { connect, registerUser, checkUser, updateUserInfo } = require('./user-api/mongodb'); // Import mongodb.js functions
 
 require('dotenv').config();
 
@@ -77,26 +77,73 @@ app.prepare().then(() => {
     }
   });
 
-  // Handle updating user profile endpoint
-  server.put('/api/update-profile', async (req, res) => {
+  // Handle password change endpoint
+  server.put('/api/change-password', async (req, res) => {
     try {
-      const { userId, updatedUserData } = req.body;
+      const { email, currentPassword, newPassword } = req.body;
 
-      // Check if userId and updatedUserData are provided
-      if (!userId || !updatedUserData) {
-        return res.status(400).json({ success: false, message: "userId and updatedUserData are required" });
+      // Fetch user data from the database
+      const user = await checkUser(email, currentPassword);
+
+      // Check if user is found
+      if (!user) {
+        return res.status(401).json({ message: 'Current password is incorrect' });
       }
 
-      // Update user's profile information
-      await updateUserInfo(userId, updatedUserData);
-
-      res.json({ success: true, message: "Profile updated successfully" });
+      // Remaining password change logic...
     } catch (error) {
-      console.error('Error updating profile:', error);
+      console.error('Error changing password:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+
   
+  // Handle updating user profile endpoint
+server.put('/api/update-profile', async (req, res) => {
+  try {
+    const { userId, updatedUserData, currentPassword } = req.body;
+
+    // Check if userId, updatedUserData, and currentPassword are provided
+    if (!userId || !updatedUserData || !currentPassword) {
+      return res.status(400).json({ success: false, message: "userId, updatedUserData, and currentPassword are required" });
+    }
+
+    // Fetch user data from the database
+    const user = await usersCollection.findOne({ _id: new ObjectID(userId) });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Check if current password matches
+    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ success: false, message: 'Current password is incorrect' });
+    }
+
+    // Hash the new password if provided
+    if (updatedUserData.password) {
+      updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+    }
+
+    // Update user's profile information in the database
+    const result = await usersCollection.updateOne(
+      { _id: new ObjectID(userId) },
+      { $set: updatedUserData }
+    );
+
+    if (result.modifiedCount === 0) {
+      throw new Error('User not found or no changes were made');
+    }
+
+    res.json({ success: true, message: "Profile updated successfully" });
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
   // Redirect root URL (/) to /dashboard
   server.get('/', (req, res) => {
     res.redirect('/dashboard');

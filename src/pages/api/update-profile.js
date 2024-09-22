@@ -1,17 +1,22 @@
-const { connect, updateUserInfo } = require("../../../user-api/mongodb");
+import { connect, updateUserInfo, checkUserPassword } from "../../../user-api/mongodb";
 
 export default async function handler(req, res) {
   if (req.method === "PUT") {
     try {
       await connect();
-      const { userId, updatedUserData } = req.body; // Assuming userId and updatedUserData are sent from the frontend
+      const { userId, updatedUserData, currentPassword } = req.body;
 
-      // Check if userId and updatedUserData are provided
-      if (!userId || !updatedUserData) {
-        return res.status(400).json({ success: false, message: "userId and updatedUserData are required" });
+      if (!userId || !updatedUserData || !currentPassword) {
+        return res.status(400).json({ success: false, message: "userId, updatedUserData, and currentPassword are required" });
       }
 
-      // Update user's profile information with the userId and updatedUserData
+      // Check if the current password is correct
+      const user = await checkUserPassword(userId, currentPassword);
+      if (!user) {
+        return res.status(401).json({ success: false, message: "Current password is incorrect" });
+      }
+
+      // Proceed to update the user's profile information if the password is valid
       await updateUserInfo(userId, updatedUserData);
 
       res.json({ success: true, message: "Profile updated successfully" });
