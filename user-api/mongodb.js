@@ -9,7 +9,6 @@ let usersCollection;
 
 module.exports.connect = async function () {
   try {
-    console.log(mongoDBConnectionString);
     const client = await MongoClient.connect(mongoDBConnectionString, {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -17,7 +16,6 @@ module.exports.connect = async function () {
     db = client.db();
     usersCollection = db.collection('bts530'); // Change collection name here
     console.log('Connected to MongoDB');
-    console.log(mongoDBConnectionString);
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
     throw error;
@@ -58,27 +56,31 @@ module.exports.checkUser = async function (email, password) {
   }
 };
 
-module.exports.updateUserInfo = async function (userId, updatedUserData) {
-  console.log(userId)
-  console.log(updatedUserData)
+
+
+module.exports.checkUserPassword = async function (email, currentPassword) {
   try {
-
-    // Assuming you have access to the usersCollection here
-    // Make sure you have initialized usersCollection in your connect function
-
-    // Convert userId to MongoDB ObjectID if needed
-    const objectId = require('mongodb').ObjectID;
-    const userObjectId = new objectId(userId);
-
-    // Check if password is included in the updatedUserData
-    if (updatedUserData.password) {
-      // Hash the new password before updating
-      updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+    const user = await usersCollection.findOne({ email });
+    if (!user) {
+      return null; // Return null if user is not found
     }
+    const passwordMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!passwordMatch) {
+      return null; // Return null if password doesn't match
+    }
+    return user; // Return the user if password is correct
+  } catch (error) {
+    console.error('Error checking user password:', error);
+    throw error;
+  }
+};
 
-    // Update user's profile information in the database
+
+module.exports.updateUserInfo = async function (email, updatedUserData) {
+  try {
+    // Directly update the user's profile information in the database using email as the identifier
     const result = await usersCollection.updateOne(
-      { _id: userObjectId }, // Query to find the user by their unique identifier
+      { email: email }, // Query to find the user by their email
       { $set: updatedUserData } // Update the user's data with the new values
     );
 
@@ -87,15 +89,11 @@ module.exports.updateUserInfo = async function (userId, updatedUserData) {
     }
 
     console.log('User information updated successfully');
-
-
-    if (result.modifiedCount === 0) {
-      throw new Error('User not found or no changes were made');
-    }
-
-    console.log('User information updated successfully');
+    return result; // Return the result for further handling if necessary
   } catch (error) {
     console.error('Error updating user information:', error);
     throw error;
   }
 };
+
+
