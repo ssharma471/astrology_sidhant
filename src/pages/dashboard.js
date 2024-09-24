@@ -220,7 +220,6 @@ const Dashboard = () => {
         </div>
       </section>
 
-
       {/* About Section */}
       <section className="py-5 bg-light text-center">
         <div className="container">
@@ -283,7 +282,6 @@ const Dashboard = () => {
           />
         </div>
       </section>
-
 
       {/* Footer */}
       <footer className="bg-dark text-white text-center py-4">
