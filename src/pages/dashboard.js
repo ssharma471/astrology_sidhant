@@ -8,6 +8,7 @@ const Dashboard = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [navHovered, setNavHovered] = useState(false);
 
   useEffect(() => {
     let tokenData = readToken();
@@ -27,10 +28,29 @@ const Dashboard = () => {
 
   const isLoggedIn = username !== null;
 
+  // Hover effect handler
+  const handleNavHover = () => {
+    setNavHovered(true);
+  };
+
+  const handleNavLeave = () => {
+    setNavHovered(false);
+  };
+
   return (
     <div>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+      <nav
+        className={`navbar navbar-expand-lg fixed-top shadow-sm ${
+          navHovered ? "bg-hover" : "bg-dark"
+        }`}
+        style={{
+          transition: "background-color 0.3s",
+          backgroundColor: navHovered ? "#994636" : "transparent",
+        }}
+        onMouseEnter={handleNavHover}
+        onMouseLeave={handleNavLeave}
+      >
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
             <a className="navbar-brand d-flex align-items-center">
@@ -62,22 +82,22 @@ const Dashboard = () => {
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">About Us</a>
+                  <a className="nav-link fw-semibold text-light">About Us</a>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link href="/contactUs" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">Contact Us</a>
+                  <a className="nav-link fw-semibold text-light">Contact Us</a>
                 </Link>
               </li>
               <li className="nav-item">
                 {isLoggedIn ? (
                   <Link href="/services" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
                 ) : (
                   <Link href="/" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
                 )}
               </li>
@@ -85,7 +105,7 @@ const Dashboard = () => {
                 <>
                   <li className="nav-item dropdown">
                     <a
-                      className={`nav-link dropdown-toggle fw-semibold text-dark ${
+                      className={`nav-link dropdown-toggle fw-semibold text-light ${
                         dropdownOpen ? "show" : ""
                       }`}
                       href="#"
@@ -108,10 +128,7 @@ const Dashboard = () => {
                         </Link>
                       </li>
                       <li>
-                        <button
-                          className="dropdown-item"
-                          onClick={handleLogout}
-                        >
+                        <button className="dropdown-item" onClick={handleLogout}>
                           Logout
                         </button>
                       </li>
@@ -119,12 +136,24 @@ const Dashboard = () => {
                   </li>
                   <li className="nav-item">
                     <Link href="/yourCart" legacyBehavior>
-                      <a className="nav-link fw-semibold text-dark">Your Cart</a>
+                      <a className="nav-link fw-semibold text-light">Your Cart</a>
                     </Link>
                   </li>
                 </>
               )}
             </ul>
+            {/* Search bar */}
+            <form className="d-flex ms-3">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-light" type="submit">
+                Search
+              </button>
+            </form>
           </div>
         </div>
       </nav>
@@ -160,38 +189,36 @@ const Dashboard = () => {
           )}
         </div>
       </section>
-   {/* Horoscope Section */}
-   <section className="py-5 text-center bg-light">
+
+      {/* Horoscope Section */}
+      <section className="py-5 text-center bg-light">
         <div className="container">
           <h2 className="fw-bold mb-4">Check Out Our Latest Horoscope</h2>
-         <div className="d-flex justify-content-center flex-wrap gap-4">
-  {[
-    { name: "Aries", icon: "\u2648" },       // Aries: &#9800;
-    { name: "Taurus", icon: "\u2649" },      // Taurus: &#9801;
-    { name: "Gemini", icon: "\u264A" },      // Gemini: &#9802;
-    { name: "Cancer", icon: "\u264B" },      // Cancer: &#9803;
-    { name: "Leo", icon: "\u264C" },         // Leo: &#9804;
-    { name: "Virgo", icon: "\u264D" },       // Virgo: &#9805;
-    { name: "Libra", icon: "\u264E" },       // Libra: &#9806;
-    { name: "Scorpio", icon: "\u264F" },     // Scorpio: &#9807;
-    { name: "Sagittarius", icon: "\u2650" }, // Sagittarius: &#9808;
-    { name: "Capricorn", icon: "\u2651" },   // Capricorn: &#9809;
-    { name: "Aquarius", icon: "\u2652" },    // Aquarius: &#9810;
-    { name: "Pisces", icon: "\u2653" },      // Pisces: &#9811;
-  ].map((sign, index) => (
-    <div key={index} className="text-center">
-      <div style={{ fontSize: '70px' }} className="mb-2">
-        {sign.icon}
-      </div>
-      <p className="fw-bold">{sign.name}</p>
-    </div>
-  ))}
-</div>
+          <div className="d-flex justify-content-center flex-wrap gap-4">
+            {[
+              { name: "Aries", icon: "\u2648" },
+              { name: "Taurus", icon: "\u2649" },
+              { name: "Gemini", icon: "\u264A" },
+              { name: "Cancer", icon: "\u264B" },
+              { name: "Leo", icon: "\u264C" },
+              { name: "Virgo", icon: "\u264D" },
+              { name: "Libra", icon: "\u264E" },
+              { name: "Scorpio", icon: "\u264F" },
+              { name: "Sagittarius", icon: "\u2650" },
+              { name: "Capricorn", icon: "\u2651" },
+              { name: "Aquarius", icon: "\u2652" },
+              { name: "Pisces", icon: "\u2653" },
+            ].map((sign, index) => (
+              <div key={index} className="text-center">
+                <div style={{ fontSize: "70px" }} className="mb-2">
+                  {sign.icon}
+                </div>
+                <p className="fw-bold">{sign.name}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-
-
-
 
       {/* About Section */}
       <section className="py-5 bg-light text-center">
@@ -208,9 +235,11 @@ const Dashboard = () => {
             height={400}
             className="rounded-3 shadow mb-4"
           />
-          <br></br>
+          <br />
           <Link href="/about" legacyBehavior>
-            <a className="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill">Learn More</a>
+            <a className="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill">
+              Learn More
+            </a>
           </Link>
         </div>
       </section>
@@ -238,10 +267,12 @@ const Dashboard = () => {
           <p className="lead mb-5 text-muted">
             Have any questions or queries? Feel free to reach out to us.
           </p>
-          
           <Link href="/contactUs" legacyBehavior>
-            <a className="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill">Contact Us</a>
-          </Link>          <br></br>
+            <a className="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill">
+              Contact Us
+            </a>
+          </Link>
+          <br />
           <Image
             src="/contact.png"
             alt="Contact Us"
@@ -249,7 +280,6 @@ const Dashboard = () => {
             height={90}
             className="rounded-3 shadow mb-4"
           />
-
         </div>
       </section>
 
