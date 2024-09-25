@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Avatar from 'react-avatar'; // Import Avatar component from react-avatar
+import { useRouter } from 'next/router';
+import { readToken, removeToken } from "@/lib/tokenfunc";
 
 const PageContainer = styled.div`
   display: flex;
@@ -92,6 +94,28 @@ const avatars = {
 };
 
 const About = () => {
+  const [username, setUsername] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    let tokenData = readToken();
+    if (tokenData) {
+      setUsername(tokenData.name);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    removeToken();
+    router.push("/");
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const isLoggedIn = username !== null;
+
   return (
     <PageContainer>
       {/* Navbar */}
@@ -99,20 +123,42 @@ const About = () => {
         <Link href="/" legacyBehavior>
           <a className="navbar-brand">
             <Image src="/logo.jpeg" alt="Logo" width={40} height={40} className="d-inline-block align-top rounded-circle" />
-            <span className="ms-2 fw-bold text-light">Astrology</span>
+            <span className="ms-2 fw-bold fs-3 text-primary">Astrology</span>
           </a>
         </Link>
-        <div>
+        <div className="d-flex align-items-center">
           <NavLink href="/about">About Us</NavLink>
           <NavLink href="/contactUs">Contact Us</NavLink>
           <NavLink href="/services">Our Services</NavLink>
+          <form className="d-flex me-3" onSubmit={(e) => e.preventDefault()}>
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search services..."
+              aria-label="Search"
+            />
+            <button className="btn btn-outline-light" type="submit">Search</button>
+          </form>
+          {isLoggedIn && (
+            <div className="dropdown" onClick={toggleDropdown}>
+              <button className="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" aria-expanded={dropdownOpen}>
+                {username}
+              </button>
+              {dropdownOpen && (
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><Link href="/profile" className="dropdown-item">Profile</Link></li>
+                  <li><Link href="#" className="dropdown-item" onClick={handleLogout}>Logout</Link></li>
+                </ul>
+              )}
+            </div>
+          )}
         </div>
       </Navbar>
 
       <HeroSection>
         <HeroTitle>About Us</HeroTitle>
         <HeroSubtitle>
-          Welcome to our Astrology Portal. We are dedicated to providing you with accurate astrological insights and guidance to navigate through lifes challenges.
+          Welcome to our Astrology Portal. We are dedicated to providing you with accurate astrological insights and guidance to navigate through life's challenges.
         </HeroSubtitle>
       </HeroSection>
 
@@ -120,7 +166,7 @@ const About = () => {
         <div className="text-center mb-5">
           <h2 className="mb-4">Our Mission</h2>
           <p>
-            Our team of experienced astrologers combines ancient wisdom with modern techniques to offer personalized readings and forecasts tailored to your needs. Whether youre seeking answers about love, career, or personal growth, we are here to help you unlock the secrets of the cosmos.
+            Our team of experienced astrologers combines ancient wisdom with modern techniques to offer personalized readings and forecasts tailored to your needs. Whether you're seeking answers about love, career, or personal growth, we are here to help you unlock the secrets of the cosmos.
           </p>
         </div>
 

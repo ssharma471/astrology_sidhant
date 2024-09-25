@@ -32,10 +32,10 @@ const Dashboard = () => {
 
   const isLoggedIn = username !== null;
 
-  // Hover effect handler
+  /* // Hover effect handler
   const handleNavHover = () => {
     setNavHovered(true);
-  };
+  }; */
 
   const handleNavLeave = () => {
     setNavHovered(false);
@@ -51,8 +51,8 @@ const Dashboard = () => {
           transition: "background-color 0.3s",
           backgroundColor: navHovered ? "#994636" : "transparent",
         }}
-        onMouseEnter={handleNavHover}
-        onMouseLeave={handleNavLeave}
+        /* onMouseEnter={handleNavHover}
+        onMouseLeave={handleNavLeave} */
       >
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
@@ -355,3 +355,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

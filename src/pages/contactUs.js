@@ -5,11 +5,11 @@ import { readToken, removeToken } from "@/lib/tokenfunc";
 import { useRouter } from "next/router";
 import Script from 'next/script'; // Import the Script component to handle external scripts properly
 
-
 const ContactUs = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     let tokenData = readToken();
@@ -31,12 +31,12 @@ const ContactUs = () => {
 
   return (
     <>
-<Script
+      <Script
         src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"
         strategy="afterInteractive"
       />
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark shadow-sm fixed-top">
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
             <a className="navbar-brand d-flex align-items-center">
@@ -60,30 +60,28 @@ const ContactUs = () => {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="collapse navbar-collapse justify-content-end"
-            id="navbarNav"
-          >
+          </button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         
+          <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">About Us</a>
+                  <a className="nav-link fw-semibold text-white">About Us</a>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link href="/contactUs" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">Contact Us</a>
+                  <a className="nav-link fw-semibold text-white">Contact Us</a>
                 </Link>
               </li>
               <li className="nav-item">
                 {isLoggedIn ? (
                   <Link href="/services" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-white">Our Services</a>
                   </Link>
                 ) : (
                   <Link href="/" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-white">Our Services</a>
                   </Link>
                 )}
               </li>
@@ -91,7 +89,7 @@ const ContactUs = () => {
                 <>
                   <li className="nav-item dropdown">
                     <a
-                      className={`nav-link dropdown-toggle fw-semibold text-dark ${dropdownOpen ? "show" : ""
+                      className={`nav-link dropdown-toggle fw-semibold text-white ${dropdownOpen ? "show" : ""
                         }`}
                       href="#"
                       id="navbarDropdown"
@@ -112,10 +110,7 @@ const ContactUs = () => {
                         </Link>
                       </li>
                       <li>
-                        <button
-                          className="dropdown-item"
-                          onClick={handleLogout}
-                        >
+                        <button className="dropdown-item" onClick={handleLogout}>
                           Logout
                         </button>
                       </li>
@@ -123,9 +118,20 @@ const ContactUs = () => {
                   </li>
                   <li className="nav-item">
                     <Link href="/yourCart" legacyBehavior>
-                      <a className="nav-link fw-semibold text-dark">Your Cart</a>
+                      <a className="nav-link fw-semibold text-white">Your Cart</a>
                     </Link>
                   </li>
+                   {/* Search Bar */}
+          <form className="d-flex ms-3" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button className="btn btn-light ms-2" type="submit">Search</button>
+            </form>
                 </>
               )}
             </ul>
@@ -137,8 +143,6 @@ const ContactUs = () => {
       <section className="py-5 bg-light text-center">
         <div className="container">
           <div className="mb-5">
-            <br></br>            <br></br>
-
             <h2 className="fw-bold text-dark mb-3">Get in Touch with Us</h2>
             <p className="lead text-muted mb-4">
               Have questions or need assistance? We’re here to help you. Reach out to us using the form below or contact us directly.
@@ -183,45 +187,41 @@ const ContactUs = () => {
                 </li>
                 <li>
                   <i className="bi bi-geo-alt-fill me-2"></i>
-                  Seneca Health Center, 1750 Finch Ave E Building E, North York, ON M2J 2X5                </li>
+                  Seneca Health Center, 1750 Finch Ave E Building E, North York, ON M2J 2X5
+                </li>
               </ul>
             </div>
-{/* Map Integration */}
-<div className="col-md-8 mt-4" style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
-  <h4 className="fw-bold text-dark">Our Location</h4>
-  <div className="embed-responsive embed-responsive-16by9" style={{ border: '5px solid lightblue', borderRadius: '13px' }}>
-    <iframe
-      className="embed-responsive-item"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.2468169073134!2d-79.34854130452425!3d43.79645236883428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35d8f24ae067%3A0x7d6e51d1d024d8b2!2sSeneca%20Polytechnic%20College%20Newnham%20Residence!5e0!3m2!1sen!2sus!4v1635412312625!5m2!1sen!2sus"
-      width="100%"
-      height="300"
-      style={{ border: 100 }}
-      allowFullScreen
-      loading="lazy"
-      title="Google Maps Location"
-    ></iframe>
-  </div>
+            {/* Map Integration */}
+            <div className="col-md-8 mt-4" style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
+              <h4 className="fw-bold text-dark">Our Location</h4>
+              <div className="embed-responsive embed-responsive-16by9" style={{ border: '5px solid lightblue', borderRadius: '13px' }}>
+                <iframe
+                  className="embed-responsive-item"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.2468169073134!2d-79.34854130452425!3d43.79645236883428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35d8f24ae067%3A0x7d6e51d1d024d8b2!2sSeneca%20Polytechnic%20College%20Newnham%20Residence!5e0!3m2!1sen!2sus!4v1635412312625!5m2!1sen!2sus"
+                  width="100%"
+                  height="300"
+                  style={{ border: 100 }}
+                  allowFullScreen
+                  loading="lazy"
+                  title="Google Maps Location"
+                ></iframe>
+              </div>
 
-  {/* Get Directions Button */}
-  <div className="mt-4">
-    <button
-      className="btn btn-primary btn-lg px-4 py-2 rounded-pill"
-      onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=43.796452,-79.348541', '_blank')}
-    >
-      Get Directions
-    </button>
-  </div>
-</div>
-
-
+              {/* Get Directions Button */}
+              <div className="mt-4">
+                <button
+                  className="btn btn-primary btn-lg px-4 py-2 rounded-pill"
+                  onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=43.796452,-79.348541', '_blank')}
+                >
+                  Get Directions
+                </button>
+              </div>
+            </div>
           </div>
-          
-          
 
-             {/* Social Media Links */}
-             <div className="mb-5">
+          {/* Social Media Links */}
+          <div className="mb-5">
             <h4 className="fw-bold text-dark">Follow Us On</h4>
-            <br></br>
             <div className="d-flex justify-content-center gap-5">
               <a href="https://facebook.com" className="text-dark" aria-label="Facebook">
                 <i className="fa fa-facebook fa-2x"></i>
