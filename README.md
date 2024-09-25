@@ -90,3 +90,6 @@ Employs Visual Studio Code as the primary code editor for HTML, CSS, and JavaScr
 Vercel or Netlify
 Purpose: Platforms for deploying frontend applications.
 Benefits: Offer seamless deployment of Next.js projects, provide automatic SSL, global CDN, and other features that improve site performance and reliability.
+
+For images will use Unsplash
+https://unsplash.com/images/religion/astrology
