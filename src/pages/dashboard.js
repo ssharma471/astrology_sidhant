@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { readToken, removeToken } from "@/lib/tokenfunc";
 import { useRouter } from "next/router";
-// Hello
+
 const Dashboard = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
