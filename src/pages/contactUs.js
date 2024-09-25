@@ -183,28 +183,39 @@ const ContactUs = () => {
                 </li>
                 <li>
                   <i className="bi bi-geo-alt-fill me-2"></i>
-                  1234 Astrological Ave, Suite 567, Zodiac City, CA 12345
-                </li>
+                  Seneca Health Center, 1750 Finch Ave E Building E, North York, ON M2J 2X5                </li>
               </ul>
             </div>
+{/* Map Integration */}
+<div className="col-md-8 mt-4" style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
+  <h4 className="fw-bold text-dark">Our Location</h4>
+  <div className="embed-responsive embed-responsive-16by9" style={{ border: '5px solid lightblue', borderRadius: '13px' }}>
+    <iframe
+      className="embed-responsive-item"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.2468169073134!2d-79.34854130452425!3d43.79645236883428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35d8f24ae067%3A0x7d6e51d1d024d8b2!2sSeneca%20Polytechnic%20College%20Newnham%20Residence!5e0!3m2!1sen!2sus!4v1635412312625!5m2!1sen!2sus"
+      width="100%"
+      height="300"
+      style={{ border: 100 }}
+      allowFullScreen
+      loading="lazy"
+      title="Google Maps Location"
+    ></iframe>
+  </div>
 
-            {/* Map Integration */}
-            <div className="col-md-8 mt-4" style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
-            <h4 className="fw-bold text-dark" >Our Location</h4>
-            <div className="embed-responsive embed-responsive-16by9" style={{ border: '5px solid lightblue', borderRadius: '13px' }}>
-            <iframe
-                  className="embed-responsive-item"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.2468169073134!2d-79.34854130452425!3d43.79645236883428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35d8f24ae067%3A0x7d6e51d1d024d8b2!2sSeneca%20Polytechnic%20College%20Newnham%20Residence!5e0!3m2!1sen!2sus!4v1635412312625!5m2!1sen!2sus"
-                  width="100%"
-                  height="300"
-                  style={{ border: 100 }}
-                  allowFullScreen
-                  loading="lazy"
-                  title="Google Maps Location"
-                ></iframe>
-              </div>
-            </div>
+  {/* Get Directions Button */}
+  <div className="mt-4">
+    <button
+      className="btn btn-primary btn-lg px-4 py-2 rounded-pill"
+      onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=43.796452,-79.348541', '_blank')}
+    >
+      Get Directions
+    </button>
+  </div>
+</div>
+
+
           </div>
+          
           
 
              {/* Social Media Links */}
