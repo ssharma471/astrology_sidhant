@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { readToken, removeToken } from "@/lib/tokenfunc";
 import { useRouter } from "next/router";
-// Hello
+
 const Dashboard = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [navHovered, setNavHovered] = useState(false);
-
 
   useEffect(() => {
     let tokenData = readToken();
