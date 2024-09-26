@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Avatar from 'react-avatar'; // Import Avatar component from react-avatar
-import { useRouter } from 'next/router';
 import { readToken, removeToken } from "@/lib/tokenfunc";
+import { useRouter } from "next/router";
 
 const PageContainer = styled.div`
   display: flex;
@@ -94,9 +94,11 @@ const avatars = {
 };
 
 const About = () => {
+  const router = useRouter();
   const [username, setUsername] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const router = useRouter();
+  const [navHovered, setNavHovered] = useState(false);
+
 
   useEffect(() => {
     let tokenData = readToken();
@@ -116,44 +118,131 @@ const About = () => {
 
   const isLoggedIn = username !== null;
 
+  // Hover effect handler
+  const handleNavHover = () => {
+    setNavHovered(true);
+  };
+
+  const handleNavLeave = () => {
+    setNavHovered(false);
+  };
   return (
     <PageContainer>
-      {/* Navbar */}
-      <Navbar>
-        <Link href="/" legacyBehavior>
-          <a className="navbar-brand">
-            <Image src="/logo.jpeg" alt="Logo" width={40} height={40} className="d-inline-block align-top rounded-circle" />
-            <span className="ms-2 fw-bold fs-3 text-primary">Astrology</span>
-          </a>
-        </Link>
-        <div className="d-flex align-items-center">
-          <NavLink href="/about">About Us</NavLink>
-          <NavLink href="/contactUs">Contact Us</NavLink>
-          <NavLink href="/services">Our Services</NavLink>
-          <form className="d-flex me-3" onSubmit={(e) => e.preventDefault()}>
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search services..."
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-light" type="submit">Search</button>
-          </form>
-          {isLoggedIn && (
-            <div className="dropdown" onClick={toggleDropdown}>
-              <button className="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" aria-expanded={dropdownOpen}>
-                {username}
-              </button>
-              {dropdownOpen && (
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><Link href="/profile" className="dropdown-item">Profile</Link></li>
-                  <li><Link href="#" className="dropdown-item" onClick={handleLogout}>Logout</Link></li>
-                </ul>
+    {/* Navbar */}
+    <nav
+  className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
+  style={{
+    transition: "background-color 0.3s",
+    backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
+  }}
+  onMouseEnter={handleNavHover}
+  onMouseLeave={handleNavLeave}
+>
+        <div className="container">
+          <Link href="/dashboard" legacyBehavior>
+            <a className="navbar-brand d-flex align-items-center">
+              <Image
+                src="/logo.jpeg"
+                alt="Logo"
+                width={40}
+                height={40}
+                className="d-inline-block align-top rounded-circle"
+              />
+              <span className="ms-2 fw-bold fs-3 text-primary">Astrology</span>
+            </a>
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div
+            className="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <ul className="navbar-nav align-items-center">
+              <li className="nav-item">
+                <Link href="/about" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">About Us</a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/contactUs" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Contact Us</a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                {isLoggedIn ? (
+                  <Link href="/services" legacyBehavior>
+                    <a className="nav-link fw-semibold text-light">Our Services</a>
+                  </Link>
+                ) : (
+                  <Link href="/" legacyBehavior>
+                    <a className="nav-link fw-semibold text-light">Our Services</a>
+                  </Link>
+                )}
+              </li>
+              {isLoggedIn && (
+                <>
+                  <li className="nav-item dropdown">
+                    <a
+                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""
+                        }`}
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      aria-expanded={dropdownOpen ? "true" : "false"}
+                      onClick={toggleDropdown}
+                    >
+                      {username}
+                    </a>
+                    <ul
+                      className={`dropdown-menu dropdown-menu-end border-0 shadow ${dropdownOpen ? "show" : ""
+                        }`}
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <li>
+                        <Link href="/edit-profile" legacyBehavior>
+                          <a className="dropdown-item">Edit Profile</a>
+                        </Link>
+                      </li>
+                      <li>
+                        <button className="dropdown-item" onClick={handleLogout}>
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="nav-item">
+                    <Link href="/yourCart" legacyBehavior>
+                      <a className="nav-link fw-semibold text-light">Your Cart</a>
+                    </Link>
+                  </li>
+                </>
               )}
-            </div>
-          )}
+            </ul>
+            {/* Search bar */}
+            <form className="d-flex ms-3">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-light" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
         </div>
-      </Navbar>
+      </nav>
+
 
       <HeroSection>
         <HeroTitle>About Us</HeroTitle>
@@ -166,7 +255,7 @@ const About = () => {
         <div className="text-center mb-5">
           <h2 className="mb-4">Our Mission</h2>
           <p>
-            Our team of experienced astrologers combines ancient wisdom with modern techniques to offer personalized readings and forecasts tailored to your needs. Whether you are seeking answers about love, career, or personal growth, we are here to help you unlock the secrets of the cosmos.
+            Our team of experienced astrologers combines ancient wisdom with modern techniques to offer personalized readings and forecasts tailored to your needs. Whether youre seeking answers about love, career, or personal growth, we are here to help you unlock the secrets of the cosmos.
           </p>
         </div>
 
