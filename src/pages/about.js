@@ -158,7 +158,7 @@ const About = () => {
       <HeroSection>
         <HeroTitle>About Us</HeroTitle>
         <HeroSubtitle>
-          Welcome to our Astrology Portal. We are dedicated to providing you with accurate astrological insights and guidance to navigate through life's challenges.
+          Welcome to our Astrology Portal. We are dedicated to providing you with accurate astrological insights and guidance to navigate through lifes challenges.
         </HeroSubtitle>
       </HeroSection>
 
