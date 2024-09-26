@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { readToken, removeToken } from "@/lib/tokenfunc";
@@ -10,6 +10,8 @@ const ContactUs = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [navHovered, setNavHovered] = useState(false);
+
 
   useEffect(() => {
     let tokenData = readToken();
@@ -29,14 +31,32 @@ const ContactUs = () => {
 
   const isLoggedIn = username !== null;
 
+  // Hover effect handler
+  const handleNavHover = () => {
+    setNavHovered(true);
+  };
+
+  const handleNavLeave = () => {
+    setNavHovered(false);
+  };
+
+
   return (
     <>
 <Script
         src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"
         strategy="afterInteractive"
       />
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    {/* Navbar */}
+    <nav
+  className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
+  style={{
+    transition: "background-color 0.3s",
+    backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
+  }}
+  onMouseEnter={handleNavHover}
+  onMouseLeave={handleNavLeave}
+>
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
             <a className="navbar-brand d-flex align-items-center">
@@ -68,22 +88,22 @@ const ContactUs = () => {
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">About Us</a>
+                  <a className="nav-link fw-semibold text-light">About Us</a>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link href="/contactUs" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">Contact Us</a>
+                  <a className="nav-link fw-semibold text-light">Contact Us</a>
                 </Link>
               </li>
               <li className="nav-item">
                 {isLoggedIn ? (
                   <Link href="/services" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
                 ) : (
                   <Link href="/" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
                 )}
               </li>
@@ -91,7 +111,7 @@ const ContactUs = () => {
                 <>
                   <li className="nav-item dropdown">
                     <a
-                      className={`nav-link dropdown-toggle fw-semibold text-dark ${dropdownOpen ? "show" : ""
+                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""
                         }`}
                       href="#"
                       id="navbarDropdown"
@@ -112,10 +132,7 @@ const ContactUs = () => {
                         </Link>
                       </li>
                       <li>
-                        <button
-                          className="dropdown-item"
-                          onClick={handleLogout}
-                        >
+                        <button className="dropdown-item" onClick={handleLogout}>
                           Logout
                         </button>
                       </li>
@@ -123,12 +140,24 @@ const ContactUs = () => {
                   </li>
                   <li className="nav-item">
                     <Link href="/yourCart" legacyBehavior>
-                      <a className="nav-link fw-semibold text-dark">Your Cart</a>
+                      <a className="nav-link fw-semibold text-light">Your Cart</a>
                     </Link>
                   </li>
                 </>
               )}
             </ul>
+            {/* Search bar */}
+            <form className="d-flex ms-3">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-light" type="submit">
+                Search
+              </button>
+            </form>
           </div>
         </div>
       </nav>
@@ -183,28 +212,39 @@ const ContactUs = () => {
                 </li>
                 <li>
                   <i className="bi bi-geo-alt-fill me-2"></i>
-                  1234 Astrological Ave, Suite 567, Zodiac City, CA 12345
-                </li>
+                  Seneca Health Center, 1750 Finch Ave E Building E, North York, ON M2J 2X5                </li>
               </ul>
             </div>
+{/* Map Integration */}
+<div className="col-md-8 mt-4" style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
+  <h4 className="fw-bold text-dark">Our Location</h4>
+  <div className="embed-responsive embed-responsive-16by9" style={{ border: '5px solid lightblue', borderRadius: '13px' }}>
+    <iframe
+      className="embed-responsive-item"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.2468169073134!2d-79.34854130452425!3d43.79645236883428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35d8f24ae067%3A0x7d6e51d1d024d8b2!2sSeneca%20Polytechnic%20College%20Newnham%20Residence!5e0!3m2!1sen!2sus!4v1635412312625!5m2!1sen!2sus"
+      width="100%"
+      height="300"
+      style={{ border: 100 }}
+      allowFullScreen
+      loading="lazy"
+      title="Google Maps Location"
+    ></iframe>
+  </div>
 
-            {/* Map Integration */}
-            <div className="col-md-8 mt-4" style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
-            <h4 className="fw-bold text-dark" >Our Location</h4>
-            <div className="embed-responsive embed-responsive-16by9" style={{ border: '5px solid lightblue', borderRadius: '13px' }}>
-            <iframe
-                  className="embed-responsive-item"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.2468169073134!2d-79.34854130452425!3d43.79645236883428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35d8f24ae067%3A0x7d6e51d1d024d8b2!2sSeneca%20Polytechnic%20College%20Newnham%20Residence!5e0!3m2!1sen!2sus!4v1635412312625!5m2!1sen!2sus"
-                  width="100%"
-                  height="300"
-                  style={{ border: 100 }}
-                  allowFullScreen
-                  loading="lazy"
-                  title="Google Maps Location"
-                ></iframe>
-              </div>
-            </div>
+  {/* Get Directions Button */}
+  <div className="mt-4">
+    <button
+      className="btn btn-primary btn-lg px-4 py-2 rounded-pill"
+      onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=43.796452,-79.348541', '_blank')}
+    >
+      Get Directions
+    </button>
+  </div>
+</div>
+
+
           </div>
+          
           
 
              {/* Social Media Links */}
