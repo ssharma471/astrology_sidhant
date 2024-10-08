@@ -3,20 +3,24 @@ import Link from "next/link";
 import Image from "next/image";
 import { readToken, removeToken } from "@/lib/tokenfunc";
 import { useRouter } from "next/router";
-import Script from 'next/script'; // Import the Script component to handle external scripts properly
-
+import Script from 'next/script';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"; // Importing the calendar CSS
 
 const ContactUs = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [navHovered, setNavHovered] = useState(false);
-
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [showBookingButton, setShowBookingButton] = useState(false);
+  const [email, setEmail] = useState(""); // Assuming the user email is retrieved from token
 
   useEffect(() => {
     let tokenData = readToken();
     if (tokenData) {
       setUsername(tokenData.name);
+      setEmail(tokenData.email); // Assume email is stored in the token
     }
   }, []);
 
@@ -29,34 +33,43 @@ const ContactUs = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const isLoggedIn = username !== null;
-
-  // Hover effect handler
-  const handleNavHover = () => {
-    setNavHovered(true);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setShowBookingButton(true); // Show the booking button after date selection
+    setConfirmationMessage(""); // Clear any previous messages
   };
 
-  const handleNavLeave = () => {
-    setNavHovered(false);
-  };
+  const handleBooking = async () => {
+    try {
+      const response = await fetch('/api/bookAppointment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ date: selectedDate, email }),
+      });
 
+      const data = await response.json();
+      if (data.success) {
+        setConfirmationMessage(`Your appointment for ${selectedDate.toDateString()} is confirmed! An email has been sent to ${email}.`);
+        setShowBookingButton(false); // Hide the booking button after confirmation
+      } else {
+        setConfirmationMessage("There was an error booking your appointment. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error booking appointment:", error);
+      setConfirmationMessage("Error sending confirmation. Please try again.");
+    }
+  };
 
   return (
     <>
-<Script
+      {/* Navbar */}
+      <Script
         src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"
         strategy="afterInteractive"
       />
-    {/* Navbar */}
-    <nav
-  className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
-  style={{
-    transition: "background-color 0.3s",
-    backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
-  }}
-  onMouseEnter={handleNavHover}
-  onMouseLeave={handleNavLeave}
->
+      <nav className="navbar navbar-expand-lg fixed-top shadow-sm bg-dark">
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
             <a className="navbar-brand d-flex align-items-center">
@@ -81,10 +94,7 @@ const ContactUs = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div
-            className="collapse navbar-collapse justify-content-end"
-            id="navbarNav"
-          >
+          <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
@@ -97,7 +107,7 @@ const ContactUs = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                {isLoggedIn ? (
+                {username ? (
                   <Link href="/services" legacyBehavior>
                     <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
@@ -107,12 +117,11 @@ const ContactUs = () => {
                   </Link>
                 )}
               </li>
-              {isLoggedIn && (
+              {username && (
                 <>
                   <li className="nav-item dropdown">
                     <a
-                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""
-                        }`}
+                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""}`}
                       href="#"
                       id="navbarDropdown"
                       role="button"
@@ -122,8 +131,7 @@ const ContactUs = () => {
                       {username}
                     </a>
                     <ul
-                      className={`dropdown-menu dropdown-menu-end border-0 shadow ${dropdownOpen ? "show" : ""
-                        }`}
+                      className={`dropdown-menu dropdown-menu-end border-0 shadow ${dropdownOpen ? "show" : ""}`}
                       aria-labelledby="navbarDropdown"
                     >
                       <li>
@@ -138,40 +146,74 @@ const ContactUs = () => {
                       </li>
                     </ul>
                   </li>
-                  <li className="nav-item">
-                    <Link href="/yourCart" legacyBehavior>
-                      <a className="nav-link fw-semibold text-light">Your Cart</a>
-                    </Link>
-                  </li>
                 </>
               )}
             </ul>
-            {/* Search bar */}
-            <form className="d-flex ms-3">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-light" type="submit">
-                Search
-              </button>
-            </form>
           </div>
         </div>
       </nav>
 
       {/* Contact Section */}
+      <br></br>      <br></br>
+
       <section className="py-5 bg-light text-center">
         <div className="container">
           <div className="mb-5">
-            <br></br>            <br></br>
-
-            <h2 className="fw-bold text-dark mb-3">Get in Touch with Us</h2>
+            <h2 className="fw-bold text-dark mb-4">Get in Touch with Us</h2>
             <p className="lead text-muted mb-4">
               Have questions or need assistance? We’re here to help you. Reach out to us using the form below or contact us directly.
             </p>
+          </div>
+
+          {/* Calendar and Booking Section */}
+          <div className="mb-5">
+            <h4 className="fw-bold text-dark mb-4">Book an Appointment</h4>
+            <DatePicker
+              selected={selectedDate}
+              onChange={handleDateChange}
+              inline
+            />
+            <br></br>
+            {showBookingButton && (
+  <button
+    className="btn btn-lg book-btn px-3 py-2 rounded-pill mt-4"
+    onClick={handleBooking}
+  >
+    Book This Time Slot
+  </button>
+)}
+
+{/* Styling block */}
+<style jsx>{`
+  .book-btn {
+    background: linear-gradient(90deg, #36D1DC, #5B86E5);
+    color: white;
+    border: none;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .book-btn:hover {
+    background: linear-gradient(90deg, #5B86E5, #36D1DC);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+  }
+
+  .book-btn:active {
+    background: linear-gradient(90deg, #5B86E5, #36D1DC);
+    transform: translateY(0);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  }
+`}</style>
+
+
+            {confirmationMessage && (
+              <div className="alert alert-success mt-4">
+                {confirmationMessage}
+              </div>
+            )}
           </div>
 
           {/* Contact Form */}
@@ -197,7 +239,7 @@ const ContactUs = () => {
             </div>
           </div>
 
-          {/* Contact Details */}
+          {/* Map Integration */}
           <div className="row justify-content-center mb-5">
             <div className="col-md-4">
               <h4 className="fw-bold text-dark">Contact Information</h4>
@@ -212,43 +254,40 @@ const ContactUs = () => {
                 </li>
                 <li>
                   <i className="bi bi-geo-alt-fill me-2"></i>
-                  Seneca Health Center, 1750 Finch Ave E Building E, North York, ON M2J 2X5                </li>
+                  Seneca Health Center, 1750 Finch Ave E Building E, North York, ON M2J 2X5
+                </li>
               </ul>
             </div>
-{/* Map Integration */}
-<div className="col-md-8 mt-4" style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
-  <h4 className="fw-bold text-dark">Our Location</h4>
-  <div className="embed-responsive embed-responsive-16by9" style={{ border: '5px solid lightblue', borderRadius: '13px' }}>
-    <iframe
-      className="embed-responsive-item"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.2468169073134!2d-79.34854130452425!3d43.79645236883428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35d8f24ae067%3A0x7d6e51d1d024d8b2!2sSeneca%20Polytechnic%20College%20Newnham%20Residence!5e0!3m2!1sen!2sus!4v1635412312625!5m2!1sen!2sus"
-      width="100%"
-      height="300"
-      style={{ border: 100 }}
-      allowFullScreen
-      loading="lazy"
-      title="Google Maps Location"
-    ></iframe>
-  </div>
 
-  {/* Get Directions Button */}
-  <div className="mt-4">
-    <button
-      className="btn btn-primary btn-lg px-4 py-2 rounded-pill"
-      onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=43.796452,-79.348541', '_blank')}
-    >
-      Get Directions
-    </button>
-  </div>
-</div>
+            <div className="col-md-8 mt-4" style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
+              <h4 className="fw-bold text-dark">Our Location</h4>
+              <div className="embed-responsive embed-responsive-16by9" style={{ border: '5px solid lightblue', borderRadius: '13px' }}>
+                <iframe
+                  className="embed-responsive-item"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.2468169073134!2d-79.34854130452425!3d43.79645236883428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35d8f24ae067%3A0x7d6e51d1d024d8b2!2sSeneca%20Polytechnic%20College%20Newnham%20Residence!5e0!3m2!1sen!2sus!4v1635412312625!5m2!1sen!2sus"
+                  width="100%"
+                  height="300"
+                  style={{ border: 100 }}
+                  allowFullScreen
+                  loading="lazy"
+                  title="Google Maps Location"
+                ></iframe>
+              </div>
 
-
+              {/* Get Directions Button */}
+              <div className="mt-4">
+                <button
+                  className="btn btn-primary btn-lg px-4 py-2 rounded-pill"
+                  onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=43.796452,-79.348541', '_blank')}
+                >
+                  Get Directions
+                </button>
+              </div>
+            </div>
           </div>
-          
-          
 
-             {/* Social Media Links */}
-             <div className="mb-5">
+          {/* Social Media Links */}
+          <div className="mb-5">
             <h4 className="fw-bold text-dark">Follow Us On</h4>
             <br></br>
             <div className="d-flex justify-content-center gap-5">
