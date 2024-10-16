@@ -146,9 +146,32 @@ const ContactUs = () => {
                       </li>
                     </ul>
                   </li>
+                  <li className="nav-item">
+                <Link href="/blog" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Blogs</a>
+                </Link>
+              </li>
+
+                  <li className="nav-item">
+                    <Link href="/yourCart" legacyBehavior>
+                      <a className="nav-link fw-semibold text-light">Your Cart</a>
+                    </Link>
+                  </li>
                 </>
               )}
             </ul>
+            {/* Search bar */}
+            <form className="d-flex ms-3">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-light" type="submit">
+                Search
+              </button>
+            </form>
           </div>
         </div>
       </nav>
