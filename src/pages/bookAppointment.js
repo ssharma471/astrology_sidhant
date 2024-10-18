@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const bookAppointment = () => {
+const BookAppointment = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -348,4 +348,5 @@ const bookAppointment = () => {
   );
 };
 
-export default bookAppointment;
+
+export default BookAppointment;
