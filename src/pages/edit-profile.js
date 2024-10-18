@@ -11,10 +11,12 @@ const EditProfile = () => {
   const [tokenData, setTokenData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({
+    
     name: '',
     email: '',
     password: ''
   });
+  const [navHovered, setNavHovered] = useState(false);
   const [editInfo, setEditInfo] = useState({});
   const [currentPassword, setCurrentPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -143,12 +145,26 @@ const EditProfile = () => {
       console.error('Error updating profile:', error);
     }
   };
+  const handleNavHover = () => {
+    setNavHovered(true);
+  };
 
+  const handleNavLeave = () => {
+    setNavHovered(false);
+  };
   const renderViewMode = () => (
 
 
     <div className="container mt-5">
-      <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+     <nav
+        className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
+        style={{
+          transition: "background-color 0.3s",
+          backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
+        }}
+        onMouseEnter={handleNavHover}
+        onMouseLeave={handleNavLeave}
+      >
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
             <a className="navbar-brand d-flex align-items-center">
@@ -179,31 +195,57 @@ const EditProfile = () => {
           >
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
-                <Link href="/about" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">About Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/contactUs" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">Contact Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
                 {isLoggedIn ? (
                   <Link href="/services" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Services</a>
                   </Link>
                 ) : (
                   <Link href="/" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
+
                 )}
+              </li>
+              <li className="nav-item">
+                <Link href="/bookAppointment" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Book Appointment </a>
+                </Link>
+              </li>
+              
+
+              <li className="nav-item">
+                <Link href="/about" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">About Us</a>
+                </Link>
+              </li>
+
+
+
+
+
+              <li className="nav-item">
+                <Link href="/blog" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Blogs</a>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link href="/contactUs" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Contact Us</a>
+                </Link>
+              </li>
+
+
+              <li className="nav-item">
+                <Link href="/yourCart" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Cart</a>
+                </Link>
               </li>
               {isLoggedIn && (
                 <>
                   <li className="nav-item dropdown">
                     <a
-                      className={`nav-link dropdown-toggle fw-semibold text-dark ${dropdownOpen ? "show" : ""
+                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""
                         }`}
                       href="#"
                       id="navbarDropdown"
@@ -224,23 +266,27 @@ const EditProfile = () => {
                         </Link>
                       </li>
                       <li>
-                        <button
-                          className="dropdown-item"
-                          onClick={handleLogout}
-                        >
+                        <button className="dropdown-item" onClick={handleLogout}>
                           Logout
                         </button>
                       </li>
                     </ul>
                   </li>
-                  <li className="nav-item">
-                    <Link href="/yourCart" legacyBehavior>
-                      <a className="nav-link fw-semibold text-dark">Your Cart</a>
-                    </Link>
-                  </li>
                 </>
               )}
             </ul>
+            {/* Search bar */}
+            <form className="d-flex ms-3">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-light" type="submit">
+                Search
+              </button>
+            </form>
           </div>
         </div>
       </nav><br /><br />
@@ -257,7 +303,15 @@ const EditProfile = () => {
 
   const renderEditMode = () => (
     <div className="container mt-5">
-      <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+       <nav
+        className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
+        style={{
+          transition: "background-color 0.3s",
+          backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
+        }}
+        onMouseEnter={handleNavHover}
+        onMouseLeave={handleNavLeave}
+      >
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
             <a className="navbar-brand d-flex align-items-center">
@@ -288,31 +342,74 @@ const EditProfile = () => {
           >
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
-                <Link href="/about" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">About Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/contactUs" legacyBehavior>
-                  <a className="nav-link fw-semibold text-dark">Contact Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
                 {isLoggedIn ? (
                   <Link href="/services" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Services</a>
                   </Link>
                 ) : (
                   <Link href="/" legacyBehavior>
-                    <a className="nav-link fw-semibold text-dark">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
+
                 )}
+              </li>
+              <li className="nav-item">
+                <Link href="/bookAppointment" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Book Appointment </a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/bookAppointment" legacyBehavior>
+                  <a className="nav-link  text-dark" title="Book Appointment" aria-label="Book Appointment">
+                    <i className="fas fa-calendar-alt"></i>
+                  </a>
+                </Link>
+               
+
+              </li>
+              <style jsx>{`
+       .nav-link i {
+  font-size: 1.2rem;  /* Adjust the size */
+  color: white;     /* Adjust the color */
+
+  margin-right: 0.1rem;  /* Add some spacing if necessary */
+}
+
+           `}</style>
+
+              <li className="nav-item">
+                <Link href="/about" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">About Us</a>
+                </Link>
+              </li>
+
+
+
+
+
+              <li className="nav-item">
+                <Link href="/blog" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Blogs</a>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link href="/contactUs" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Contact Us</a>
+                </Link>
+              </li>
+
+
+              <li className="nav-item">
+                <Link href="/yourCart" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Cart</a>
+                </Link>
               </li>
               {isLoggedIn && (
                 <>
                   <li className="nav-item dropdown">
                     <a
-                      className={`nav-link dropdown-toggle fw-semibold text-dark ${dropdownOpen ? "show" : ""
+                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""
                         }`}
                       href="#"
                       id="navbarDropdown"
@@ -333,26 +430,31 @@ const EditProfile = () => {
                         </Link>
                       </li>
                       <li>
-                        <button
-                          className="dropdown-item"
-                          onClick={handleLogout}
-                        >
+                        <button className="dropdown-item" onClick={handleLogout}>
                           Logout
                         </button>
                       </li>
                     </ul>
                   </li>
-                  <li className="nav-item">
-                    <Link href="/yourCart" legacyBehavior>
-                      <a className="nav-link fw-semibold text-dark">Your Cart</a>
-                    </Link>
-                  </li>
                 </>
               )}
             </ul>
+            {/* Search bar */}
+            <form className="d-flex ms-3">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-light" type="submit">
+                Search
+              </button>
+            </form>
           </div>
         </div>
-      </nav><br /><br />
+      </nav>
+      <br /><br />
       <h1>Edit Profile</h1>
       <div className="card mt-3 p-4">
         <form onSubmit={handleSubmit}>

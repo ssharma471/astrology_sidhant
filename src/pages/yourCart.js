@@ -84,14 +84,14 @@ const YourCart = () => {
     <div>
       {/* Navbar */}
       <nav
-  className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
-  style={{
-    transition: "background-color 0.3s",
-    backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
-  }}
-  onMouseEnter={handleNavHover}
-  onMouseLeave={handleNavLeave}
->
+        className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
+        style={{
+          transition: "background-color 0.3s",
+          backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
+        }}
+        onMouseEnter={handleNavHover}
+        onMouseLeave={handleNavLeave}
+      >
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
             <a className="navbar-brand d-flex align-items-center">
@@ -122,25 +122,51 @@ const YourCart = () => {
           >
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
-                <Link href="/about" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">About Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/contactUs" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Contact Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
                 {isLoggedIn ? (
                   <Link href="/services" legacyBehavior>
-                    <a className="nav-link fw-semibold text-light">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Services</a>
                   </Link>
                 ) : (
                   <Link href="/" legacyBehavior>
                     <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
+
                 )}
+              </li>
+              <li className="nav-item">
+                <Link href="/bookAppointment" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Book Appointment </a>
+                </Link>
+              </li>
+              
+
+              <li className="nav-item">
+                <Link href="/about" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">About Us</a>
+                </Link>
+              </li>
+
+
+
+
+
+              <li className="nav-item">
+                <Link href="/blog" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Blogs</a>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link href="/contactUs" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Contact Us</a>
+                </Link>
+              </li>
+
+
+              <li className="nav-item">
+                <Link href="/yourCart" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Cart</a>
+                </Link>
               </li>
               {isLoggedIn && (
                 <>
@@ -172,16 +198,6 @@ const YourCart = () => {
                         </button>
                       </li>
                     </ul>
-                  </li>
-                  <li className="nav-item">
-                <Link href="/blog" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Blogs</a>
-                </Link>
-              </li>
-                  <li className="nav-item">
-                    <Link href="/yourCart" legacyBehavior>
-                      <a className="nav-link fw-semibold text-light">Your Cart</a>
-                    </Link>
                   </li>
                 </>
               )}
@@ -227,6 +243,12 @@ const YourCart = () => {
           gap: 20px;
           padding: 20px;
         }
+          .nav-link i {
+  font-size: 1.2rem;  /* Adjust the size */
+  color: white;     /* Adjust the color */
+
+  margin-right: 0.1rem;  /* Add some spacing if necessary */
+}
         .service-item {
           background-color: #fff;
           border-radius: 8px;

@@ -57,14 +57,14 @@ const Services = () => {
     <div>
       {/* Navbar */}
       <nav
-  className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
-  style={{
-    transition: "background-color 0.3s",
-    backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
-  }}
-  onMouseEnter={handleNavHover}
-  onMouseLeave={handleNavLeave}
->
+        className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
+        style={{
+          transition: "background-color 0.3s",
+          backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
+        }}
+        onMouseEnter={handleNavHover}
+        onMouseLeave={handleNavLeave}
+      >
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
             <a className="navbar-brand d-flex align-items-center">
@@ -95,25 +95,50 @@ const Services = () => {
           >
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
-                <Link href="/about" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">About Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/contactUs" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Contact Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
                 {isLoggedIn ? (
                   <Link href="/services" legacyBehavior>
-                    <a className="nav-link fw-semibold text-light">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Services</a>
                   </Link>
                 ) : (
                   <Link href="/" legacyBehavior>
                     <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
+
                 )}
+              </li>
+              <li className="nav-item">
+                <Link href="/bookAppointment" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Book Appointment </a>
+                </Link>
+              </li>
+              
+              <li className="nav-item">
+                <Link href="/about" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">About Us</a>
+                </Link>
+              </li>
+
+
+
+
+
+              <li className="nav-item">
+                <Link href="/blog" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Blogs</a>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link href="/contactUs" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Contact Us</a>
+                </Link>
+              </li>
+
+
+              <li className="nav-item">
+                <Link href="/yourCart" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Cart</a>
+                </Link>
               </li>
               {isLoggedIn && (
                 <>
@@ -146,16 +171,6 @@ const Services = () => {
                       </li>
                     </ul>
                   </li>
-                  <li className="nav-item">
-                <Link href="/blog" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Blogs</a>
-                </Link>
-              </li>
-                  <li className="nav-item">
-                    <Link href="/yourCart" legacyBehavior>
-                      <a className="nav-link fw-semibold text-light">Your Cart</a>
-                    </Link>
-                  </li>
                 </>
               )}
             </ul>
@@ -174,6 +189,11 @@ const Services = () => {
           </div>
         </div>
       </nav>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+
       <div className="container">
         <h2 className="page-title">Our Astrology Services</h2>
         <div className="services-grid">
@@ -227,6 +247,12 @@ const Services = () => {
           color: #888;
           margin-top: 10px;
         }
+          .nav-link i {
+  font-size: 1.2rem;  /* Adjust the size */
+  color: white;     /* Adjust the color */
+
+  margin-right: 0.1rem;  /* Add some spacing if necessary */
+}
       `}</style>
       <footer className="bg-dark text-white text-center py-4">
         <p>&copy; 2024 Astrology World. All Rights Reserved.</p>

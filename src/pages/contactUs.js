@@ -3,9 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { readToken, removeToken } from "@/lib/tokenfunc";
 import { useRouter } from "next/router";
-import Script from 'next/script';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; // Importing the calendar CSS
 const ContactUs = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
@@ -36,47 +33,7 @@ const ContactUs = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleDateChange = async (date) => {
-    setSelectedDate(date);
-    setShowBookingButton(false); // Hide the booking button initially
-    setConfirmationMessage(""); // Clear any previous messages
-    setSelectedTimeSlot(null); // Clear previous time slot selection
-
-    // Fetch available time slots for the selected date
-    const response = await fetch(`/api/getTimeSlots?date=${date.toISOString()}`);
-    const data = await response.json();
-    setTimeSlots(data.timeSlots); // Update the time slots for the selected date
-  };
-
-  const handleBooking = async () => {
-    if (!selectedTimeSlot) {
-      setConfirmationMessage("Please select a time slot.");
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/bookAppointment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ date: selectedDate, timeSlot: selectedTimeSlot, email }),
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        setConfirmationMessage(`Your appointment for ${selectedDate.toDateString()} at ${selectedTimeSlot} is confirmed! An email has been sent to ${email}.`);
-        setShowBookingButton(false); // Hide the booking button after confirmation
-        // Remove the booked time slot from the list
-        setTimeSlots(timeSlots.filter(slot => slot !== selectedTimeSlot));
-      } else {
-        setConfirmationMessage("Time slot already chosen! Try another time");
-      }
-    } catch (error) {
-      console.error("Error booking appointment:", error);
-      setConfirmationMessage("Error sending confirmation. Please try again.");
-    }
-  };
+  
   const handleNavHover = () => {
     setNavHovered(true);
   };
@@ -86,7 +43,7 @@ const ContactUs = () => {
   };
   return (
     <>
-      {/* Navbar and other sections... */}
+      {/* Navbar */}
       {/* Navbar */}
       <nav
         className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
@@ -127,25 +84,50 @@ const ContactUs = () => {
           >
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
-                <Link href="/about" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">About Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/contactUs" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Contact Us</a>
-                </Link>
-              </li>
-              <li className="nav-item">
                 {isLoggedIn ? (
                   <Link href="/services" legacyBehavior>
-                    <a className="nav-link fw-semibold text-light">Our Services</a>
+                    <a className="nav-link fw-semibold text-light">Services</a>
                   </Link>
                 ) : (
                   <Link href="/" legacyBehavior>
                     <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
+
                 )}
+              </li>
+              <li className="nav-item">
+                <Link href="/bookAppointment" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Book Appointment </a>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link href="/about" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">About Us</a>
+                </Link>
+              </li>
+
+
+
+
+
+              <li className="nav-item">
+                <Link href="/blog" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Blogs</a>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link href="/contactUs" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Contact Us</a>
+                </Link>
+              </li>
+
+
+              <li className="nav-item">
+                <Link href="/yourCart" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Cart</a>
+                </Link>
               </li>
               {isLoggedIn && (
                 <>
@@ -178,17 +160,6 @@ const ContactUs = () => {
                       </li>
                     </ul>
                   </li>
-                  <li className="nav-item">
-                    <Link href="/blog" legacyBehavior>
-                      <a className="nav-link fw-semibold text-light">Blogs</a>
-                    </Link>
-                  </li>
-
-                  <li className="nav-item">
-                    <Link href="/yourCart" legacyBehavior>
-                      <a className="nav-link fw-semibold text-light">Your Cart</a>
-                    </Link>
-                  </li>
                 </>
               )}
             </ul>
@@ -220,81 +191,7 @@ const ContactUs = () => {
             </p>
           </div>
 
-          {/* Calendar and Booking Section */}
-          <div className="mb-5">
-              <h4 className="fw-bold text-dark mb-4">Book an Appointment</h4>
-              <DatePicker
-                selected={selectedDate}
-                onChange={handleDateChange}
-                inline
-                minDate={new Date()}  // Disable all past dates
-              />
-              <br />
-
-              {selectedDate && (
-                <div>
-                  <h5 className="fw-bold text-dark mb-4">Available Time Slots</h5>
-                  <ul className="list-group">
-                    {timeSlots.length > 0 ? (
-                      timeSlots.map((slot, index) => (
-                        <li key={index} className="list-group-item">
-                          <input
-                            type="radio"
-                            id={`timeslot-${index}`}
-                            name="timeslot"
-                            value={slot}
-                            onChange={() => setSelectedTimeSlot(slot)}
-                          />
-                          <label htmlFor={`timeslot-${index}`}>{slot}</label>
-                        </li>
-                      ))
-                    ) : (
-                      <li className="list-group-item">No time slots available for this date.</li>
-                    )}
-                  </ul>
-                </div>
-              )}
-
-              {selectedTimeSlot && (
-                <button
-                  className="btn btn-lg book-btn px-3 py-2 rounded-pill mt-4"
-                  onClick={handleBooking}
-                >
-                  Book This Time Slot
-                </button>
-              )}
-
-              {/* Styling block */}
-              <style jsx>{`
-          .book-btn {
-            background: linear-gradient(90deg, #36D1DC, #5B86E5);
-            color: white;
-            border: none;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: all 0.3s ease-in-out;
-          }
-
-          .book-btn:hover {
-            background: linear-gradient(90deg, #5B86E5, #36D1DC);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-            transform: translateY(-3px);
-          }
-
-          .book-btn:active {
-            background: linear-gradient(90deg, #5B86E5, #36D1DC);
-            transform: translateY(0);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-          }
-        `}</style>
-
-              {confirmationMessage && (
-                <div className="alert alert-success mt-4">
-                  {confirmationMessage}
-                </div>
-              )}
-            </div>
+         
 
           {/* Contact Form */}
           <div className="row justify-content-center mb-5">

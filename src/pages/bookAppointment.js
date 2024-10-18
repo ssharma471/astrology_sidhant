@@ -1,104 +1,65 @@
 import React, { useState, useEffect } from "react";
-import Link from 'next/link';
-import Image from 'next/image';
-import styled from 'styled-components';
-import Avatar from 'react-avatar'; // Import Avatar component from react-avatar
+import Link from "next/link";
+import Image from "next/image";
 import { readToken, removeToken } from "@/lib/tokenfunc";
 import { useRouter } from "next/router";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: linear-gradient(to right, #f5f5f5, #e0e0e0); /* Light gradient background */
-`;
-
-const Navbar = styled.nav`
-  background: #333;
-  color: white;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const NavLink = styled(Link)`
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const HeroSection = styled.section`
-  background: linear-gradient(to right, white, lightblue), url('/images/hero-bg.jpg') no-repeat center center/cover;
-  color: black;
-  text-align: center;
-  padding: 80px 20px;
-`;
-
-const HeroTitle = styled.h1`
-  font-size: 3rem;
-  margin-bottom: 20px;
-  font-weight: bold;
-`;
-
-const HeroSubtitle = styled.p`
-  font-size: 1.25rem;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.6;
-`;
-
-const Content = styled.main`
-  flex: 1;
-  padding: 40px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const TeamContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const TeamMember = styled.div`
-  margin: 20px;
-  text-align: center;
-  width: 200px;
-`;
-
-const MemberName = styled.h3`
-  font-size: 18px;
-  color: #333;
-`;
-
-const MemberPosition = styled.p`
-  font-size: 14px;
-  color: #666;
-`;
-
-const Footer = styled.footer`
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 20px;
-`;
-
-const avatars = {
-  'Sidhant Sharma': { color: '#e91e63', name: 'Sidhant Sharma' },
-  'Meetsimar Kaur': { color: '#3f51b5', name: 'Meetsimar Kaur' },
-  'Samarth Modi': { color: '#4caf50', name: 'Samarth Modi' },
-};
-
-const About = () => {
+const bookAppointment = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [email, setEmail] = useState("");
   const [navHovered, setNavHovered] = useState(false);
+  const isLoggedIn = username !== null;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  useEffect(() => {
+    let tokenData = readToken();
+    if (tokenData) {
+      setUsername(tokenData.name);
+      setEmail(tokenData.email);
+    }
+  }, []);
+
+  const handleDateChange = async (date) => {
+    setSelectedDate(date);
+    setSelectedTimeSlot(null);
+    const response = await fetch(`/api/getTimeSlots?date=${date.toISOString()}`);
+    const data = await response.json();
+    setTimeSlots(data.timeSlots);
+  };
+
+  const handleBooking = async () => {
+    if (!selectedTimeSlot) {
+      setConfirmationMessage("Please select a time slot.");
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/bookAppointment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ date: selectedDate, timeSlot: selectedTimeSlot, email }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setConfirmationMessage(`Your appointment is confirmed for ${selectedDate.toDateString()} at ${selectedTimeSlot} `);
+      } else {
+        setConfirmationMessage("The selected time slot has already been taken! Please choose another time.");
+      }
+    } catch (error) {
+      setConfirmationMessage("Error sending confirmation. Please try again.");
+    }
+  };
 
   useEffect(() => {
     let tokenData = readToken();
@@ -111,14 +72,9 @@ const About = () => {
     removeToken();
     router.push("/");
   };
-
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
-
-  const isLoggedIn = username !== null;
-
-  // Hover effect handler
   const handleNavHover = () => {
     setNavHovered(true);
   };
@@ -127,10 +83,10 @@ const About = () => {
     setNavHovered(false);
   };
   return (
-    <PageContainer>
-    {/* Navbar */}
-         {/* Navbar */}
-         <nav
+    <>
+       {/* Navbar */}
+      {/* Navbar */}
+      <nav
         className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
         style={{
           transition: "background-color 0.3s",
@@ -185,7 +141,7 @@ const About = () => {
                   <a className="nav-link fw-semibold text-light">Book Appointment </a>
                 </Link>
               </li>
-              
+         
 
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
@@ -266,46 +222,130 @@ const About = () => {
       </nav>
 
 
-      <HeroSection>
-        <HeroTitle>About Us</HeroTitle>
-        <HeroSubtitle>
-          Welcome to our Astrology Portal. We are dedicated to providing you with accurate astrological insights and guidance to navigate through lifes challenges.
-        </HeroSubtitle>
-      </HeroSection>
+      <br></br>
+      <br></br>
+      <br></br>
 
-      <Content>
-        <div className="text-center mb-5">
-          <h2 className="mb-4">Our Mission</h2>
-          <p>
-            Our team of experienced astrologers combines ancient wisdom with modern techniques to offer personalized readings and forecasts tailored to your needs. Whether youre seeking answers about love, career, or personal growth, we are here to help you unlock the secrets of the cosmos.
-          </p>
+      <section className="booking-section py-5">
+        <div className="container text-center">
+          <h2 className="fw-bold text-dark mb-4">Select a Date & Time</h2>
+          <div className="calendar-section d-flex justify-content-around align-items-start">
+            <div>
+              <DatePicker selected={selectedDate} onChange={handleDateChange} inline minDate={new Date()} />
+              <p className="time-zone">Time zone: Eastern time - US & Canada</p>
+            </div>
+
+            {selectedDate && (
+              <div className="time-slots-section">
+                <h5 className="fw-bold mb-4">Available Time Slots</h5>
+                <ul className="list-group">
+                  {timeSlots.length > 0 ? (
+                    timeSlots.map((slot, index) => (
+                      <li key={index} className="list-group-item time-slot-item">
+                        <input
+                          type="radio"
+                          id={`timeslot-${index}`}
+                          name="timeslot"
+                          value={slot}
+                          onClick={() => setSelectedTimeSlot(slot)}
+                        />
+                        <label htmlFor={`timeslot-${index}`}>{slot}</label>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="list-group-item">No time slots available for this date.</li>
+                  )}
+                </ul>
+                {selectedTimeSlot && (
+                  <button className="btn btn-primary mt-4" onClick={handleBooking}>
+                    Confirm
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+
+          {confirmationMessage && (
+            <div className="alert alert-success mt-4">
+              {confirmationMessage}
+            </div>
+          )}
         </div>
+      </section>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
 
-        {/* Team Section */}
-        <TeamContainer>
-          <TeamMember>
-            <Avatar name={avatars['Sidhant Sharma'].name} color={avatars['Sidhant Sharma'].color} round={true} size="100" />
-            <MemberName>Sidhant Sharma</MemberName>
-            <MemberPosition>Frontend Developer</MemberPosition>
-          </TeamMember>
-          <TeamMember>
-            <Avatar name={avatars['Meetsimar Kaur'].name} color={avatars['Meetsimar Kaur'].color} round={true} size="100" />
-            <MemberName>Meetsimar Kaur</MemberName>
-            <MemberPosition>Database Administrator</MemberPosition>
-          </TeamMember>
-          <TeamMember>
-            <Avatar name={avatars['Samarth Modi'].name} color={avatars['Samarth Modi'].color} round={true} size="100" />
-            <MemberName>Samarth Modi</MemberName>
-            <MemberPosition>Backend Developer</MemberPosition>
-          </TeamMember>
-        </TeamContainer>
-      </Content>
-
-      <Footer>
+      <footer className="bg-dark text-white text-center py-4">
         <p>&copy; 2024 Astrology World. All Rights Reserved.</p>
-      </Footer>
-    </PageContainer>
+      </footer>
+
+      <style jsx>{`
+        .booking-section {
+          background-color: #f9f9f9;
+          padding: 1rem;
+          border-radius: 10px;
+        }
+
+        .calendar-section {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+
+        .time-slots-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border-left: 1px solid lightblue;
+          padding-left: 5rem;
+        }
+
+        .list-group-item {
+          padding: 1rem;
+          border: 1px solid lightblue;
+          border-radius: 10px;
+          margin-bottom: 20px;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .nav-link i {
+  font-size: 1.2rem;  /* Adjust the size */
+  color: white;     /* Adjust the color */
+
+  margin-right: 0.1rem;  /* Add some spacing if necessary */
+}
+        .time-slot-item:hover {
+          background-color: lightblue;
+          border-color: black;
+        }
+
+        .btn-primary {
+          background-color: #1890ff;
+          border-color: #1890ff;
+          padding: 0.75rem 1.5rem;
+          font-size: 1rem;
+        }
+
+        .time-zone {
+          margin-top: 20px;
+          color: #888;
+          font-size: 0.875rem;
+        }
+      `}</style>
+    </>
   );
 };
 
-export default About;
+export default bookAppointment;
