@@ -14,7 +14,7 @@ module.exports.connect = async function () {
       useUnifiedTopology: true
     });
     db = client.db();
-    usersCollection = db.collection('bts530'); // Change collection name here
+    usersCollection = db.collection('users-information'); // Change collection name here
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);

@@ -6,15 +6,18 @@ import { useRouter } from "next/router";
 import Script from 'next/script';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Importing the calendar CSS
-
 const ContactUs = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [timeSlots, setTimeSlots] = useState([]); // Time slots for the selected date
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null); // Selected time slot
   const [confirmationMessage, setConfirmationMessage] = useState("");
   const [showBookingButton, setShowBookingButton] = useState(false);
-  const [email, setEmail] = useState(""); // Assuming the user email is retrieved from token
+  const [email, setEmail] = useState("");
+  const [navHovered, setNavHovered] = useState(false);
+  const isLoggedIn = username !== null;
 
   useEffect(() => {
     let tokenData = readToken();
@@ -33,43 +36,67 @@ const ContactUs = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleDateChange = (date) => {
+  const handleDateChange = async (date) => {
     setSelectedDate(date);
-    setShowBookingButton(true); // Show the booking button after date selection
+    setShowBookingButton(false); // Hide the booking button initially
     setConfirmationMessage(""); // Clear any previous messages
+    setSelectedTimeSlot(null); // Clear previous time slot selection
+
+    // Fetch available time slots for the selected date
+    const response = await fetch(`/api/getTimeSlots?date=${date.toISOString()}`);
+    const data = await response.json();
+    setTimeSlots(data.timeSlots); // Update the time slots for the selected date
   };
 
   const handleBooking = async () => {
+    if (!selectedTimeSlot) {
+      setConfirmationMessage("Please select a time slot.");
+      return;
+    }
+
     try {
       const response = await fetch('/api/bookAppointment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ date: selectedDate, email }),
+        body: JSON.stringify({ date: selectedDate, timeSlot: selectedTimeSlot, email }),
       });
 
       const data = await response.json();
       if (data.success) {
-        setConfirmationMessage(`Your appointment for ${selectedDate.toDateString()} is confirmed! An email has been sent to ${email}.`);
+        setConfirmationMessage(`Your appointment for ${selectedDate.toDateString()} at ${selectedTimeSlot} is confirmed! An email has been sent to ${email}.`);
         setShowBookingButton(false); // Hide the booking button after confirmation
+        // Remove the booked time slot from the list
+        setTimeSlots(timeSlots.filter(slot => slot !== selectedTimeSlot));
       } else {
-        setConfirmationMessage("There was an error booking your appointment. Please try again.");
+        setConfirmationMessage("Time slot already chosen! Try another time");
       }
     } catch (error) {
       console.error("Error booking appointment:", error);
       setConfirmationMessage("Error sending confirmation. Please try again.");
     }
   };
+  const handleNavHover = () => {
+    setNavHovered(true);
+  };
 
+  const handleNavLeave = () => {
+    setNavHovered(false);
+  };
   return (
     <>
+      {/* Navbar and other sections... */}
       {/* Navbar */}
-      <Script
-        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"
-        strategy="afterInteractive"
-      />
-      <nav className="navbar navbar-expand-lg fixed-top shadow-sm bg-dark">
+      <nav
+        className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
+        style={{
+          transition: "background-color 0.3s",
+          backgroundColor: navHovered ? "#333" : "transparent", // Changed the hover color to dark grey
+        }}
+        onMouseEnter={handleNavHover}
+        onMouseLeave={handleNavLeave}
+      >
         <div className="container">
           <Link href="/dashboard" legacyBehavior>
             <a className="navbar-brand d-flex align-items-center">
@@ -94,7 +121,10 @@ const ContactUs = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <div
+            className="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
@@ -107,7 +137,7 @@ const ContactUs = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                {username ? (
+                {isLoggedIn ? (
                   <Link href="/services" legacyBehavior>
                     <a className="nav-link fw-semibold text-light">Our Services</a>
                   </Link>
@@ -117,11 +147,12 @@ const ContactUs = () => {
                   </Link>
                 )}
               </li>
-              {username && (
+              {isLoggedIn && (
                 <>
                   <li className="nav-item dropdown">
                     <a
-                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""}`}
+                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""
+                        }`}
                       href="#"
                       id="navbarDropdown"
                       role="button"
@@ -131,7 +162,8 @@ const ContactUs = () => {
                       {username}
                     </a>
                     <ul
-                      className={`dropdown-menu dropdown-menu-end border-0 shadow ${dropdownOpen ? "show" : ""}`}
+                      className={`dropdown-menu dropdown-menu-end border-0 shadow ${dropdownOpen ? "show" : ""
+                        }`}
                       aria-labelledby="navbarDropdown"
                     >
                       <li>
@@ -147,10 +179,10 @@ const ContactUs = () => {
                     </ul>
                   </li>
                   <li className="nav-item">
-                <Link href="/blog" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Blogs</a>
-                </Link>
-              </li>
+                    <Link href="/blog" legacyBehavior>
+                      <a className="nav-link fw-semibold text-light">Blogs</a>
+                    </Link>
+                  </li>
 
                   <li className="nav-item">
                     <Link href="/yourCart" legacyBehavior>
@@ -190,54 +222,79 @@ const ContactUs = () => {
 
           {/* Calendar and Booking Section */}
           <div className="mb-5">
-            <h4 className="fw-bold text-dark mb-4">Book an Appointment</h4>
-            <DatePicker
-              selected={selectedDate}
-              onChange={handleDateChange}
-              inline
-            />
-            <br></br>
-            {showBookingButton && (
-  <button
-    className="btn btn-lg book-btn px-3 py-2 rounded-pill mt-4"
-    onClick={handleBooking}
-  >
-    Book This Time Slot
-  </button>
-)}
+              <h4 className="fw-bold text-dark mb-4">Book an Appointment</h4>
+              <DatePicker
+                selected={selectedDate}
+                onChange={handleDateChange}
+                inline
+                minDate={new Date()}  // Disable all past dates
+              />
+              <br />
 
-{/* Styling block */}
-<style jsx>{`
-  .book-btn {
-    background: linear-gradient(90deg, #36D1DC, #5B86E5);
-    color: white;
-    border: none;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
-  }
+              {selectedDate && (
+                <div>
+                  <h5 className="fw-bold text-dark mb-4">Available Time Slots</h5>
+                  <ul className="list-group">
+                    {timeSlots.length > 0 ? (
+                      timeSlots.map((slot, index) => (
+                        <li key={index} className="list-group-item">
+                          <input
+                            type="radio"
+                            id={`timeslot-${index}`}
+                            name="timeslot"
+                            value={slot}
+                            onChange={() => setSelectedTimeSlot(slot)}
+                          />
+                          <label htmlFor={`timeslot-${index}`}>{slot}</label>
+                        </li>
+                      ))
+                    ) : (
+                      <li className="list-group-item">No time slots available for this date.</li>
+                    )}
+                  </ul>
+                </div>
+              )}
 
-  .book-btn:hover {
-    background: linear-gradient(90deg, #5B86E5, #36D1DC);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px);
-  }
+              {selectedTimeSlot && (
+                <button
+                  className="btn btn-lg book-btn px-3 py-2 rounded-pill mt-4"
+                  onClick={handleBooking}
+                >
+                  Book This Time Slot
+                </button>
+              )}
 
-  .book-btn:active {
-    background: linear-gradient(90deg, #5B86E5, #36D1DC);
-    transform: translateY(0);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-  }
-`}</style>
+              {/* Styling block */}
+              <style jsx>{`
+          .book-btn {
+            background: linear-gradient(90deg, #36D1DC, #5B86E5);
+            color: white;
+            border: none;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+          }
 
+          .book-btn:hover {
+            background: linear-gradient(90deg, #5B86E5, #36D1DC);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+          }
 
-            {confirmationMessage && (
-              <div className="alert alert-success mt-4">
-                {confirmationMessage}
-              </div>
-            )}
-          </div>
+          .book-btn:active {
+            background: linear-gradient(90deg, #5B86E5, #36D1DC);
+            transform: translateY(0);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+          }
+        `}</style>
+
+              {confirmationMessage && (
+                <div className="alert alert-success mt-4">
+                  {confirmationMessage}
+                </div>
+              )}
+            </div>
 
           {/* Contact Form */}
           <div className="row justify-content-center mb-5">
@@ -335,8 +392,11 @@ const ContactUs = () => {
       <footer className="bg-dark text-white text-center py-4">
         <p>&copy; 2024 Astrology World. All Rights Reserved.</p>
       </footer>
-    </>
-  );
+            
+
+            {/* Contact Form and other sections... */}
+          </>
+          );
 };
 
-export default ContactUs;
+          export default ContactUs;
