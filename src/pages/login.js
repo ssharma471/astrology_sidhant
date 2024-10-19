@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { setToken } from '../lib/tokenfunc';
+import Image from "next/image";
 
-const Login = () => {
+const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -11,24 +12,21 @@ const Login = () => {
   async function handleLogin(e) {
     e.preventDefault();
     try {
-      // Use fetch to send a POST request to your login endpoint
       const response = await fetch('/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          email: username, // Assuming username field is used for email
+          email: username,
           password: password
         })
       });
   
-      // Check if login was successful based on response status
       if (response.ok) {
         const resp = await response.json();
-        console.log(resp);
         setToken(resp.token);
-        router.push('/dashboard'); // Redirect to dashboard if authentication is successful
+        router.push('/dashboard');
       } else {
         const errorResponse = await response.json();
         if (errorResponse.error === 'Invalid password') {
@@ -44,27 +42,58 @@ const Login = () => {
       setError('An error occurred, please try again later');
     }
   }
-  
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>Login Page</h1>
-      {error && <p style={styles.error}>{error}</p>}
-      <form style={styles.form}>
-        <label style={styles.label}>
-          Email:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} style={styles.input} />
-        </label>
-        <br />
-        <label style={styles.label}>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={styles.input} />
-        </label>
-        <br />
-        <button type="button" onClick={handleLogin} style={styles.button}>
-          Login
-        </button>
-      </form>
+      <div style={styles.leftContainer}>
+        <div style={styles.logoContainer}>
+          <img src="/logo.jpeg" alt="Astrology Logo" style={styles.logo} className="d-inline-block align-top rounded-circle"/>
+          <h2 style={styles.logoText}>Astrology</h2>
+        </div>
+        <h1 style={styles.welcomeText}>Welcome Back!</h1>
+        <p style={styles.subText}>Please enter your login details below</p>
+
+        {error && <p style={styles.error}>{error}</p>}
+
+        <form onSubmit={handleLogin} style={styles.form}>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Email:</label>
+            <input
+              type="email"
+              placeholder="Enter the email"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Password:</label>
+            <input
+              type="password"
+              placeholder="Enter the password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+          
+          <button type="submit" style={styles.signInButton}>Sign in</button>
+        </form>
+
+        <div style={styles.signUpText}>
+          <span>Don't have an account? </span>
+          <a href="/register" style={styles.link}>Sign Up</a>
+        </div>
+      </div>
+
+      <div style={styles.rightContainer}>
+        <Image
+          src="/loginWall2.jpg"
+          alt="Login Background"
+          width={865}
+          height={900}
+        />
+      </div>
     </div>
   );
 };
@@ -72,48 +101,121 @@ const Login = () => {
 const styles = {
   container: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '100vh',
-    backgroundColor: '#f0f0f0', 
-    backgroundSize: 'cover',
+    height: '100vh',
+    flexDirection: 'row',
   },
-  heading: {
-    fontSize: '2rem',
+  leftContainer: {
+    width: '50%',
+    padding: '50px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  logoContainer: {
+    display: 'flex',
+    alignItems: 'center',
     marginBottom: '20px',
-    color: '#333', 
+  },
+  logo: {
+    width: '40px',
+    marginRight: '10px',
+  },
+  logoText: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#0070f3',
+  },
+  welcomeText: {
+    fontSize: '2.5rem',
+    marginBottom: '10px',
+  },
+  subText: {
+    fontSize: '1rem',
+    marginBottom: '30px',
+    color: '#777',
   },
   form: {
-    width: '300px',
-    padding: '20px',
-    backgroundColor: '#fff', 
-    borderRadius: '8px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  inputGroup: {
+    marginBottom: '20px',
   },
   label: {
+    fontSize: '1rem',
+    marginBottom: '8px',
     display: 'block',
-    marginBottom: '10px',
   },
   input: {
     width: '100%',
-    padding: '8px',
-    marginBottom: '15px',
-    boxSizing: 'border-box',
+    padding: '12px',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    fontSize: '1rem',
   },
-  button: {
-    width: '100%',
-    padding: '10px',
-    backgroundColor: '#0070f3', 
-    color: '#fff', 
+  signInButton: {
+    backgroundColor: '#1E90FF',
+    color: '#fff',
+    padding: '15px',
+    borderRadius: '8px',
     border: 'none',
-    borderRadius: '5px',
     cursor: 'pointer',
+    fontSize: '1rem',
+  },
+  signUpText: {
+    textAlign: 'center',
+    marginTop: '30px',
+    fontSize: '0.9rem',
+    color: '#777',
+  },
+  rightContainer: {
+    width: '50%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    backgroundColor: '#E6E6FA',
   },
   error: {
     color: 'red',
     marginBottom: '10px',
   },
+  link: {
+    color: '#0070f3',
+    textDecoration: 'none',
+  },
+
+  /* Media Query for Smaller Screens */
+  '@media (max-width: 768px)': {
+    container: {
+      flexDirection: 'column',
+    },
+    leftContainer: {
+      width: '100%',
+      padding: '20px',
+    },
+    rightContainer: {
+      display: 'none',  // Hide right container on small screens
+    },
+    welcomeText: {
+      fontSize: '2rem',
+    },
+    subText: {
+      fontSize: '0.9rem',
+    },
+    input: {
+      fontSize: '0.9rem',
+      padding: '10px',
+    },
+    signInButton: {
+      fontSize: '0.9rem',
+      padding: '10px',
+    },
+    signUpText: {
+      fontSize: '0.8rem',
+    },
+  },
 };
 
-export default Login;
+export default LoginPage;

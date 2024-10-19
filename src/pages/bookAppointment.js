@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { readToken, removeToken } from "@/lib/tokenfunc";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; 
+import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useRouter } from "next/navigation";
 const BookAppointment = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
@@ -59,6 +59,12 @@ const BookAppointment = () => {
     } catch (error) {
       setConfirmationMessage("Error sending confirmation. Please try again.");
     }
+    // setTimeout(() => {
+    //   // Code you want to execute after 4 seconds
+    //   console.log("This runs after 4 seconds");
+    // }, 4000); // 4000 milliseconds = 4 seconds
+    // router.refresh();
+    
   };
 
   useEffect(() => {
@@ -84,7 +90,7 @@ const BookAppointment = () => {
   };
   return (
     <>
-       {/* Navbar */}
+      {/* Navbar */}
       {/* Navbar */}
       <nav
         className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
@@ -141,7 +147,7 @@ const BookAppointment = () => {
                   <a className="nav-link fw-semibold text-light">Book Appointment </a>
                 </Link>
               </li>
-         
+
 
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
@@ -231,7 +237,7 @@ const BookAppointment = () => {
           <h2 className="fw-bold text-dark mb-4">Select a Date & Time</h2>
           <div className="calendar-section d-flex justify-content-around align-items-start">
             <div>
-              <DatePicker selected={selectedDate} onChange={handleDateChange} inline minDate={new Date()} />
+              <DatePicker className="custom-datepicker" selected={selectedDate} onChange={handleDateChange} inline minDate={new Date()} />
               <p className="time-zone">Time zone: Eastern time - US & Canada</p>
             </div>
 
@@ -272,17 +278,17 @@ const BookAppointment = () => {
           )}
         </div>
       </section>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
 
       <footer className="bg-dark text-white text-center py-4">
         <p>&copy; 2024 Astrology World. All Rights Reserved.</p>
@@ -291,7 +297,7 @@ const BookAppointment = () => {
       <style jsx>{`
         .booking-section {
           background-color: #f9f9f9;
-          padding: 1rem;
+          padding: 20rem;
           border-radius: 10px;
         }
 
@@ -306,9 +312,8 @@ const BookAppointment = () => {
           flex-direction: column;
           align-items: center;
           border-left: 1px solid lightblue;
-          padding-left: 5rem;
+          padding-left: 2rem;
         }
-
         .list-group-item {
           padding: 1rem;
           border: 1px solid lightblue;
@@ -321,10 +326,10 @@ const BookAppointment = () => {
         }
 
         .nav-link i {
-  font-size: 1.2rem;  /* Adjust the size */
-  color: white;     /* Adjust the color */
+        font-size: 1.2rem;  /* Adjust the size */
+        color: white;     /* Adjust the color */
 
-  margin-right: 0.1rem;  /* Add some spacing if necessary */
+        margin-right: 0.1rem;  /* Add some spacing if necessary */
 }
         .time-slot-item:hover {
           background-color: lightblue;

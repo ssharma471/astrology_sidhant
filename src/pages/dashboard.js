@@ -348,12 +348,31 @@ const Dashboard = () => {
             <a className="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill shadow-sm">Contact Us</a>
           </Link>
           <div className="mt-5 d-flex justify-content-center">
-            <div className="d-flex justify-content-between" style={{ maxWidth: "300px", gap: "20px" }}>
+            {/* <div className="d-flex justify-content-between" style={{ maxWidth: "300px", gap: "20px" }}>
               <Image src="/icon-facebook.png" alt="Facebook" width={40} height={40} />
               <Image src="/icon-twitter.png" alt="Twitter" width={40} height={40} />
               <Image src="/icon-instagram.png" alt="Instagram" width={40} height={40} />
               <Image src="/icon-linkedin.png" alt="LinkedIn" width={40} height={40} />
+            </div> */}
+             {/* Social Media Links */}
+          <div className="mb-5">
+            <h4 className="fw-bold text-dark">Follow Us On</h4>
+            <br></br>
+            <div className="d-flex justify-content-center gap-5">
+              <a href="https://facebook.com" className="text-dark" aria-label="Facebook">
+                <i className="fa fa-facebook fa-2x"></i>
+              </a>
+              <a href="https://twitter.com" className="text-dark" aria-label="Twitter">
+                <i className="fa fa-twitter fa-2x"></i>
+              </a>
+              <a href="https://instagram.com" className="text-dark" aria-label="Instagram">
+                <i className="fa fa-instagram fa-2x"></i>
+              </a>
+              <a href="https://linkedin.com" className="text-dark" aria-label="LinkedIn">
+                <i className="fa fa-linkedin fa-2x"></i>
+              </a>
             </div>
+          </div>
           </div>
         </div>
       </section>
