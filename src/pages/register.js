@@ -118,6 +118,7 @@ const Register = () => {
           </Link>
         </div>
       </div>
+      
 
       <div style={styles.rightContainer}>
       <a className="navbar-brand">
