@@ -81,6 +81,7 @@ const BookAppointment = () => {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+  const isLoggedIn = username !== null;
 
   const handleNavHover = () => {
     setNavHovered(true);
@@ -126,58 +127,103 @@ const BookAppointment = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <div
+            className="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
-                <Link href="/services" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Services</a>
-                </Link>
+                {isLoggedIn ? (
+                  <Link href="/services" legacyBehavior>
+                    <a className="nav-link fw-semibold text-light">Services</a>
+                  </Link>
+                ) : (
+                  <Link href="/" legacyBehavior>
+                    <a className="nav-link fw-semibold text-light">Our Services</a>
+                  </Link>
+
+                )}
               </li>
               <li className="nav-item">
                 <Link href="/bookAppointment" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Book Appointment</a>
+                  <a className="nav-link fw-semibold text-light">Book Appointment </a>
                 </Link>
               </li>
+             
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
                   <a className="nav-link fw-semibold text-light">About Us</a>
                 </Link>
               </li>
+
+
+
+
+
+              <li className="nav-item">
+                <Link href="/blog" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Blogs</a>
+                </Link>
+              </li>
+
               <li className="nav-item">
                 <Link href="/contactUs" legacyBehavior>
                   <a className="nav-link fw-semibold text-light">Contact Us</a>
                 </Link>
               </li>
-              {username && (
-                <li className="nav-item dropdown">
-                  <a
-                    className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""}`}
-                    href="#"
-                    id="navbarDropdown"
-                    role="button"
-                    aria-expanded={dropdownOpen ? "true" : "false"}
-                    onClick={toggleDropdown}
-                  >
-                    {username}
-                  </a>
-                  <ul
-                    className={`dropdown-menu dropdown-menu-end border-0 shadow ${dropdownOpen ? "show" : ""}`}
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <li>
-                      <Link href="/edit-profile" legacyBehavior>
-                        <a className="dropdown-item">Edit Profile</a>
-                      </Link>
-                    </li>
-                    <li>
-                      <button className="dropdown-item" onClick={handleLogout}>
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </li>
+
+
+              <li className="nav-item">
+                <Link href="/yourCart" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Cart</a>
+                </Link>
+              </li>
+              {isLoggedIn && (
+                <>
+                  <li className="nav-item dropdown">
+                    <a
+                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""
+                        }`}
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      aria-expanded={dropdownOpen ? "true" : "false"}
+                      onClick={toggleDropdown}
+                    >
+                      {username}
+                    </a>
+                    <ul
+                      className={`dropdown-menu dropdown-menu-end border-0 shadow ${dropdownOpen ? "show" : ""
+                        }`}
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <li>
+                        <Link href="/edit-profile" legacyBehavior>
+                          <a className="dropdown-item">Edit Profile</a>
+                        </Link>
+                      </li>
+                      <li>
+                        <button className="dropdown-item" onClick={handleLogout}>
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                </>
               )}
             </ul>
+            {/* Search bar */}
+            <form className="d-flex ms-3">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-light" type="submit">
+                Search
+              </button>
+            </form>
           </div>
         </div>
       </nav>

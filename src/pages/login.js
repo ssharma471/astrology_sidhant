@@ -85,7 +85,7 @@ const LoginPage = () => {
         <div style={styles.signUpText}>
           <span>Do not have an account? </span>
           <Link href="/register">
-          <a  style={styles.link}>Sign Up</a>
+          Sign Up
           </Link>
         </div>
       </div>

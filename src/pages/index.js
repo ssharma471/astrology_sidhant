@@ -58,7 +58,7 @@ const WelcomePage = () => {
           <button style={{ padding: '10px 30px', background: 'linear-gradient(90deg, #6a00ff, #9b00ff)', color: '#fff', border: 'none', borderRadius: '30px', fontSize: '1rem', cursor: 'pointer', marginRight: '10px' }}>
             
             
-  <a style={{ textDecoration: 'none', color: 'white' }} >Continue</a>
+  Continue
 </button>   
 </Link>
 <br></br>          <br></br>
@@ -68,14 +68,14 @@ const WelcomePage = () => {
          <Link href='/login'>
 
          <button style={{ padding: '10px 30px', backgroundColor: '#0052cc', color: '#fff', border: 'none', borderRadius: '30px', fontSize: '1rem', cursor: 'pointer', marginRight: '10px' }}>
-  <a style={{ textDecoration: 'none', color: 'white' }} >Login</a>
+Login
 </button>
 </Link>
 
 <Link href='/register'>
 
 <button style={{ padding: '10px 30px', backgroundColor: '#0099ff', color: '#fff', border: 'none', borderRadius: '30px', fontSize: '1rem', cursor: 'pointer' }}>
-  <a style={{ textDecoration: 'none', color: 'white' }} >Sign Up</a>
+  Sign Up
 </button>
 </Link>
 
@@ -84,6 +84,13 @@ const WelcomePage = () => {
 
         {/* Illustration */}
         <div style={styles.imageContainer}>
+        {/* <Image 
+  src="/astro2.png" 
+  alt="Description" 
+  width={500} 
+  height={300} 
+  layout="responsive" // Adjust layout as needed
+/> */}
           <img src="/astro2.png" alt="Welcome Illustration" style={styles.image} />
         </div>
       </section>

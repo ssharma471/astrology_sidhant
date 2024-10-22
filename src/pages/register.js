@@ -113,7 +113,7 @@ const Register = () => {
         <div style={styles.signUpText}>
           <span>Already have an account? </span>
           <Link href="/login">
-          <a style={styles.link}>Log in</a>
+          Log in
           </Link>
         </div>
       </div>
