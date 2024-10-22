@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Image from "next/image";
-import { Link } from 'react-router-dom';
-
+import Link from 'next/link';
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -118,7 +117,7 @@ const Register = () => {
           </Link>
         </div>
       </div>
-      
+
 
       <div style={styles.rightContainer}>
       <a className="navbar-brand">
