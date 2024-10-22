@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { setToken } from '../lib/tokenfunc';
 import Image from "next/image";
+import Link from 'next/link';
+
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -81,8 +83,10 @@ const LoginPage = () => {
         </form>
 
         <div style={styles.signUpText}>
-          <span>Don't have an account? </span>
-          <a href="/register" style={styles.link}>Sign Up</a>
+          <span>Do not have an account? </span>
+          <Link href="/register">
+          <a  style={styles.link}>Sign Up</a>
+          </Link>
         </div>
       </div>
 

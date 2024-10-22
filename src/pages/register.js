@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from "next/image";
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -112,7 +113,9 @@ const Register = () => {
 
         <div style={styles.signUpText}>
           <span>Already have an account? </span>
-          <a href="/login" style={styles.link}>Log in</a>
+          <Link href="/login">
+          <a style={styles.link}>Log in</a>
+          </Link>
         </div>
       </div>
 

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { readToken, removeToken } from "@/lib/tokenfunc";
-// import { useRouter } from "next/router";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from "next/navigation";
+
 const BookAppointment = () => {
   const router = useRouter();
   const [username, setUsername] = useState(null);
@@ -16,18 +16,25 @@ const BookAppointment = () => {
   const [confirmationMessage, setConfirmationMessage] = useState("");
   const [email, setEmail] = useState("");
   const [navHovered, setNavHovered] = useState(false);
-  const isLoggedIn = username !== null;
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // For login error message
 
   useEffect(() => {
     let tokenData = readToken();
     if (tokenData) {
       setUsername(tokenData.name);
       setEmail(tokenData.email);
+    } else {
+      setErrorMessage("Please Login or Sign-up"); // Set error if not logged in
     }
   }, []);
 
   const handleDateChange = async (date) => {
+    if (!username) {
+      setErrorMessage("Please log in to select a date.");
+      return;
+    }
+
     setSelectedDate(date);
     setSelectedTimeSlot(null);
     const response = await fetch(`/api/getTimeSlots?date=${date.toISOString()}`);
@@ -36,6 +43,11 @@ const BookAppointment = () => {
   };
 
   const handleBooking = async () => {
+    if (!username) {
+      setErrorMessage("Please log in to book an appointment.");
+      return;
+    }
+
     if (!selectedTimeSlot) {
       setConfirmationMessage("Please select a time slot.");
       return;
@@ -52,35 +64,24 @@ const BookAppointment = () => {
 
       const data = await response.json();
       if (data.success) {
-        setConfirmationMessage(`Your appointment is confirmed for ${selectedDate.toDateString()} at ${selectedTimeSlot} `);
+        setConfirmationMessage(`Your appointment is confirmed for ${selectedDate.toDateString()} at ${selectedTimeSlot}`);
       } else {
         setConfirmationMessage("The selected time slot has already been taken! Please choose another time.");
       }
     } catch (error) {
       setConfirmationMessage("Error sending confirmation. Please try again.");
     }
-    // setTimeout(() => {
-    //   // Code you want to execute after 4 seconds
-    //   console.log("This runs after 4 seconds");
-    // }, 4000); // 4000 milliseconds = 4 seconds
-    // router.refresh();
-    
   };
-
-  useEffect(() => {
-    let tokenData = readToken();
-    if (tokenData) {
-      setUsername(tokenData.name);
-    }
-  }, []);
 
   const handleLogout = () => {
     removeToken();
     router.push("/");
   };
+
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
   const handleNavHover = () => {
     setNavHovered(true);
   };
@@ -88,9 +89,9 @@ const BookAppointment = () => {
   const handleNavLeave = () => {
     setNavHovered(false);
   };
+
   return (
     <>
-      {/* Navbar */}
       {/* Navbar */}
       <nav
         className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
@@ -125,119 +126,78 @@ const BookAppointment = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div
-            className="collapse navbar-collapse justify-content-end"
-            id="navbarNav"
-          >
+          <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
-                {isLoggedIn ? (
-                  <Link href="/services" legacyBehavior>
-                    <a className="nav-link fw-semibold text-light">Services</a>
-                  </Link>
-                ) : (
-                  <Link href="/" legacyBehavior>
-                    <a className="nav-link fw-semibold text-light">Our Services</a>
-                  </Link>
-
-                )}
+                <Link href="/services" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Services</a>
+                </Link>
               </li>
               <li className="nav-item">
                 <Link href="/bookAppointment" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Book Appointment </a>
+                  <a className="nav-link fw-semibold text-light">Book Appointment</a>
                 </Link>
               </li>
-
-
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
                   <a className="nav-link fw-semibold text-light">About Us</a>
                 </Link>
               </li>
-
-
-
-
-
-              <li className="nav-item">
-                <Link href="/blog" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Blogs</a>
-                </Link>
-              </li>
-
               <li className="nav-item">
                 <Link href="/contactUs" legacyBehavior>
                   <a className="nav-link fw-semibold text-light">Contact Us</a>
                 </Link>
               </li>
-
-
-              <li className="nav-item">
-                <Link href="/yourCart" legacyBehavior>
-                  <a className="nav-link fw-semibold text-light">Cart</a>
-                </Link>
-              </li>
-              {isLoggedIn && (
-                <>
-                  <li className="nav-item dropdown">
-                    <a
-                      className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""
-                        }`}
-                      href="#"
-                      id="navbarDropdown"
-                      role="button"
-                      aria-expanded={dropdownOpen ? "true" : "false"}
-                      onClick={toggleDropdown}
-                    >
-                      {username}
-                    </a>
-                    <ul
-                      className={`dropdown-menu dropdown-menu-end border-0 shadow ${dropdownOpen ? "show" : ""
-                        }`}
-                      aria-labelledby="navbarDropdown"
-                    >
-                      <li>
-                        <Link href="/edit-profile" legacyBehavior>
-                          <a className="dropdown-item">Edit Profile</a>
-                        </Link>
-                      </li>
-                      <li>
-                        <button className="dropdown-item" onClick={handleLogout}>
-                          Logout
-                        </button>
-                      </li>
-                    </ul>
-                  </li>
-                </>
+              {username && (
+                <li className="nav-item dropdown">
+                  <a
+                    className={`nav-link dropdown-toggle fw-semibold text-light ${dropdownOpen ? "show" : ""}`}
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    aria-expanded={dropdownOpen ? "true" : "false"}
+                    onClick={toggleDropdown}
+                  >
+                    {username}
+                  </a>
+                  <ul
+                    className={`dropdown-menu dropdown-menu-end border-0 shadow ${dropdownOpen ? "show" : ""}`}
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <li>
+                      <Link href="/edit-profile" legacyBehavior>
+                        <a className="dropdown-item">Edit Profile</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={handleLogout}>
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </li>
               )}
             </ul>
-            {/* Search bar */}
-            <form className="d-flex ms-3">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-light" type="submit">
-                Search
-              </button>
-            </form>
           </div>
         </div>
       </nav>
 
 
-      <br></br>
-      <br></br>
-      <br></br>
-
-      <section className="booking-section py-5">
+      <section className="booking-section py-7" style={{padding:"100px"}}>
         <div className="container text-center">
           <h2 className="fw-bold text-dark mb-4">Select a Date & Time</h2>
+          {errorMessage && (
+            <div className="alert alert-danger">{errorMessage}</div>
+          )}
           <div className="calendar-section d-flex justify-content-around align-items-start">
             <div>
-              <DatePicker className="custom-datepicker" selected={selectedDate} onChange={handleDateChange} inline minDate={new Date()} />
+              <DatePicker
+                className="custom-datepicker"
+                selected={selectedDate}
+                onChange={handleDateChange}
+                inline
+                minDate={new Date()}
+              />
               <p className="time-zone">Time zone: Eastern time - US & Canada</p>
             </div>
 
@@ -272,41 +232,26 @@ const BookAppointment = () => {
           </div>
 
           {confirmationMessage && (
-            <div className="alert alert-success mt-4">
-              {confirmationMessage}
-            </div>
+            <div className="alert alert-success mt-4">{confirmationMessage}</div>
           )}
         </div>
       </section>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
 
-      <footer className="bg-dark text-white text-center py-4">
-        <p>&copy; 2024 Astrology World. All Rights Reserved.</p>
-      </footer>
-
+      <footer
+    className="bg-dark text-white text-center py-4" style={{marginTop:"250px"}}>
+    <p>&copy; 2024 Astrology World. All Rights Reserved.</p>
+  </footer>
       <style jsx>{`
         .booking-section {
           background-color: #f9f9f9;
           padding: 20rem;
           border-radius: 10px;
         }
-
         .calendar-section {
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
         }
-
         .time-slots-section {
           display: flex;
           flex-direction: column;
@@ -324,25 +269,16 @@ const BookAppointment = () => {
           justify-content: space-between;
           align-items: center;
         }
-
-        .nav-link i {
-        font-size: 1.2rem;  /* Adjust the size */
-        color: white;     /* Adjust the color */
-
-        margin-right: 0.1rem;  /* Add some spacing if necessary */
-}
         .time-slot-item:hover {
           background-color: lightblue;
           border-color: black;
         }
-
         .btn-primary {
           background-color: #1890ff;
           border-color: #1890ff;
           padding: 0.75rem 1.5rem;
           font-size: 1rem;
         }
-
         .time-zone {
           margin-top: 20px;
           color: #888;
@@ -352,6 +288,5 @@ const BookAppointment = () => {
     </>
   );
 };
-
 
 export default BookAppointment;
