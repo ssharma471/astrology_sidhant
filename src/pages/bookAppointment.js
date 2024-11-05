@@ -282,6 +282,28 @@ const BookAppointment = () => {
           )}
         </div>
       </section>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+          
+
+      <footer className="bg-dark text-white text-center py-4">
+        <p>&copy; 2024 Astrology World. All Rights Reserved.</p>
+      </footer>
 
       <footer
     className="bg-dark text-white text-center py-4" style={{marginTop:"250px"}}>
