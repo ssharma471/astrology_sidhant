@@ -92,10 +92,10 @@ const LoginPage = () => {
 
       <div style={styles.rightContainer}>
         <Image
-          src="/loginWall2.jpg"
+          src="/login.jpg"
           alt="Login Background"
-          width={865}
-          height={900}
+          width={900}
+          height={940}
         />
       </div>
     </div>

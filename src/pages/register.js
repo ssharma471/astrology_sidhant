@@ -122,10 +122,11 @@ const Register = () => {
       <div style={styles.rightContainer}>
       <a className="navbar-brand">
               <Image
-                src="/loginWall3.jpeg"
+                src="/signup.jpg"
                 alt="Logo"
-                width={865}
-                height={900}
+                width={900}
+                height={1000}
+                backgroundColor="white"
                 // className="d-inline-block align-top rounded-circle"
               />
               {/* <span className="ms-2 fw-bold fs-3 text-primary">Astrology</span> */}
