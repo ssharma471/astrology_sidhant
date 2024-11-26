@@ -1,0 +1,206 @@
+{
+  "polyfillFiles": [
+    "static/chunks/polyfills-42372ed130431b0a.js"
+  ],
+  "devFiles": [],
+  "ampDevFiles": [],
+  "lowPriorityFiles": [
+    "static/MkJCQArJ5PRHxcisgrvIh/_buildManifest.js",
+    "static/MkJCQArJ5PRHxcisgrvIh/_ssgManifest.js"
+  ],
+  "rootMainFiles": [],
+  "pages": {
+    "/": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/index-94ce513eccbf7695.js"
+    ],
+    "/_app": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/css/d3df112486f97f47.css",
+      "static/chunks/pages/_app-cf1e9a14661c8585.js"
+    ],
+    "/_error": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/pages/_error-450f57aef9fe63a1.js"
+    ],
+    "/about": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/743-0ad64b5d278bc334.js",
+      "static/chunks/pages/about-546261c53634b583.js"
+    ],
+    "/blog": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/blog-fd302f931ca8974f.js"
+    ],
+    "/bookAppointment": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/26770aaf-63e227d9d55c9117.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/css/f97bf82c1c367e82.css",
+      "static/chunks/pages/bookAppointment-bdd28bbbb28ccf54.js"
+    ],
+    "/cancel": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/pages/cancel-355f71226c128b4c.js"
+    ],
+    "/checkout": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/pages/checkout-ae885699a66162b3.js"
+    ],
+    "/contactUs": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/contactUs-2c4278f534ff88b8.js"
+    ],
+    "/dashboard": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/css/921ac715acaa8639.css",
+      "static/chunks/pages/dashboard-898dae4769ff8d7f.js"
+    ],
+    "/edit-profile": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/591-731655ff5919913a.js",
+      "static/chunks/pages/edit-profile-17b39cb21747305c.js"
+    ],
+    "/login": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/login-0409b24f3c86347c.js"
+    ],
+    "/register": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/register-b0bd10a0b0ad2979.js"
+    ],
+    "/service/AstrologicalCompatibilityAnalysis": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/AstrologicalCompatibilityAnalysis-8efa1baac3b4fff5.js"
+    ],
+    "/service/AstrologicalRemedies": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/AstrologicalRemedies-09c08f9708866230.js"
+    ],
+    "/service/ChakraBalancing": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/ChakraBalancing-dbefa5a06bae2e81.js"
+    ],
+    "/service/CrystalHealing": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/CrystalHealing-b2a24c7edf98dafd.js"
+    ],
+    "/service/DreamInterpretation": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/DreamInterpretation-1b3e88f14219c919.js"
+    ],
+    "/service/HoroscopePredictions": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/HoroscopePredictions-4aaf61bfbcb47d89.js"
+    ],
+    "/service/NatalChartReadings": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/NatalChartReadings-54d8bc2c251aeb13.js"
+    ],
+    "/service/NumerologyConsultations": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/NumerologyConsultations-5fed58a1aa19df3b.js"
+    ],
+    "/service/PastLifeRegression": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/PastLifeRegression-240d6c25af902beb.js"
+    ],
+    "/service/TarotCardReadings": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/pages/service/TarotCardReadings-1993e9a63c49fbf9.js"
+    ],
+    "/services": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/395-bc93abaa72093e83.js",
+      "static/chunks/pages/services-30213d739b6b073b.js"
+    ],
+    "/success": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/pages/success-f57aa73a1ffb924d.js"
+    ],
+    "/userProfile": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/pages/userProfile-454f9647d75803b7.js"
+    ],
+    "/yourCart": [
+      "static/chunks/webpack-89934714399aedca.js",
+      "static/chunks/framework-63d16ff2f5e08230.js",
+      "static/chunks/main-1f59816bc7d16325.js",
+      "static/chunks/61-6514875cd800badd.js",
+      "static/chunks/395-bc93abaa72093e83.js",
+      "static/chunks/pages/yourCart-edf8be04f1f0fcca.js"
+    ]
+  },
+  "ampFirstPages": []
+}
