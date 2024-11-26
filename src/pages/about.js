@@ -100,13 +100,35 @@ const About = () => {
   const [navHovered, setNavHovered] = useState(false);
 
 
+  // useEffect(() => {
+  //   let tokenData = readToken();
+  //   if (tokenData) {
+  //     setUsername(tokenData.name);
+  //   }
+  // }, []);
   useEffect(() => {
     let tokenData = readToken();
     if (tokenData) {
       setUsername(tokenData.name);
     }
-  }, []);
 
+    // LiveChat script integration
+    window.__lc = window.__lc || {};
+    window.__lc.license = 18914086;
+    window.__lc.integration_name = "manual_onboarding";
+    window.__lc.product_name = "livechat";
+
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async = true;
+    script.src = "https://cdn.livechatinc.com/tracking.js";
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup LiveChat script on component unmount
+      document.head.removeChild(script);
+    };
+  }, []);
   const handleLogout = () => {
     removeToken();
     router.push("/");

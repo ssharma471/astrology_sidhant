@@ -17,7 +17,20 @@ const Dashboard = () => {
     if (tokenData) {
       setUsername(tokenData.name);
     }
+
+    // Inject Crisp Chat script
+    (function() {
+      window.$crisp = [];
+      window.CRISP_WEBSITE_ID = "b87d8202-c3a5-4036-b700-4e652ef88c28"; // Replace with your Crisp ID
+      const d = document;
+      const s = d.createElement("script");
+      s.src = "https://client.crisp.chat/l.js";
+      s.async = 1;
+      d.getElementsByTagName("head")[0].appendChild(s);
+    })();
   }, []);
+
+
 
   const handleLogout = () => {
     removeToken();
@@ -41,6 +54,7 @@ const Dashboard = () => {
 
   return (
     <div>
+      
       {/* Navbar */}
       <nav
         className={`navbar navbar-expand-lg fixed-top shadow-sm ${navHovered ? "bg-hover" : "bg-dark"}`}
@@ -101,6 +115,11 @@ const Dashboard = () => {
               <li className="nav-item">
                 <Link href="/about" legacyBehavior>
                   <a className="nav-link fw-semibold text-light">About Us</a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/checkout" legacyBehavior>
+                  <a className="nav-link fw-semibold text-light">Checkout </a>
                 </Link>
               </li>
 
