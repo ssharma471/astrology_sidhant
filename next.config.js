@@ -1,17 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
-// module.exports = {
-//   images: {
-//     domains: ['via.placeholder.com'],
-//   },
-// };
-// module.exports = nextConfig
 module.exports = {
+  distDir: 'dist', // Output directory for Next.js build
   images: {
-    distDir: 'dist', // Set the output directory to 'dist'
-    domains: ['via.placeholder.com'],
+    domains: ['example.com'], // (Optional) Add domains for Next.js Image Optimization
   },
 };
-
