@@ -5,201 +5,200 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/2JZwQAVGDo7iFiLzeaC31/_buildManifest.js",
-    "static/2JZwQAVGDo7iFiLzeaC31/_ssgManifest.js"
+    "static/VFeYszpBkv14ufVm74ZRz/_buildManifest.js",
+    "static/VFeYszpBkv14ufVm74ZRz/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
     "/": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/index-94ce513eccbf7695.js"
+      "static/chunks/pages/index-cdd99cff696e7498.js"
     ],
     "/_app": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/css/d3df112486f97f47.css",
-      "static/chunks/pages/_app-cf1e9a14661c8585.js"
+      "static/chunks/pages/_app-3d522c8cf71ee7dd.js"
     ],
     "/_error": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
-      "static/chunks/pages/_error-450f57aef9fe63a1.js"
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
+      "static/chunks/pages/_error-c20ed52d74f2067b.js"
     ],
     "/about": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
       "static/chunks/743-0ad64b5d278bc334.js",
-      "static/chunks/pages/about-546261c53634b583.js"
+      "static/chunks/pages/about-df50b22217f81f5a.js"
     ],
     "/blog": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/blog-fd302f931ca8974f.js"
+      "static/chunks/pages/blog-dc2eb2519f66ffee.js"
     ],
     "/bookAppointment": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
-      "static/chunks/26770aaf-63e227d9d55c9117.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
       "static/css/f97bf82c1c367e82.css",
-      "static/chunks/pages/bookAppointment-bdd28bbbb28ccf54.js"
+      "static/chunks/pages/bookAppointment-5d13875db51c87b4.js"
     ],
     "/cancel": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
-      "static/chunks/pages/cancel-355f71226c128b4c.js"
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
+      "static/chunks/pages/cancel-7f23abd15a34ade7.js"
     ],
     "/checkout": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
-      "static/chunks/pages/checkout-ae885699a66162b3.js"
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
+      "static/chunks/pages/checkout-1f597b96d5b4a0f2.js"
     ],
     "/contactUs": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/contactUs-2c4278f534ff88b8.js"
+      "static/chunks/pages/contactUs-e56bbd6f9f2c5e72.js"
     ],
     "/dashboard": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
       "static/css/921ac715acaa8639.css",
-      "static/chunks/pages/dashboard-898dae4769ff8d7f.js"
+      "static/chunks/pages/dashboard-d9ffb8de6d263c84.js"
     ],
     "/edit-profile": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
       "static/chunks/591-731655ff5919913a.js",
-      "static/chunks/pages/edit-profile-17b39cb21747305c.js"
+      "static/chunks/pages/edit-profile-9f97e00517074df7.js"
     ],
     "/login": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/login-0409b24f3c86347c.js"
+      "static/chunks/pages/login-905b3eba03966a47.js"
     ],
     "/register": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/register-b0bd10a0b0ad2979.js"
+      "static/chunks/pages/register-a34c7426ee815390.js"
     ],
     "/service/AstrologicalCompatibilityAnalysis": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/AstrologicalCompatibilityAnalysis-8efa1baac3b4fff5.js"
+      "static/chunks/pages/service/AstrologicalCompatibilityAnalysis-d33635d414a1c331.js"
     ],
     "/service/AstrologicalRemedies": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/AstrologicalRemedies-09c08f9708866230.js"
+      "static/chunks/pages/service/AstrologicalRemedies-8773d6848ca287c4.js"
     ],
     "/service/ChakraBalancing": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/ChakraBalancing-dbefa5a06bae2e81.js"
+      "static/chunks/pages/service/ChakraBalancing-3d7fb7c9363d96ed.js"
     ],
     "/service/CrystalHealing": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/CrystalHealing-b2a24c7edf98dafd.js"
+      "static/chunks/pages/service/CrystalHealing-e6eb12ed6f404d74.js"
     ],
     "/service/DreamInterpretation": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/DreamInterpretation-1b3e88f14219c919.js"
+      "static/chunks/pages/service/DreamInterpretation-c0ec51fc7d71e816.js"
     ],
     "/service/HoroscopePredictions": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/HoroscopePredictions-4aaf61bfbcb47d89.js"
+      "static/chunks/pages/service/HoroscopePredictions-46daca4a4836fe90.js"
     ],
     "/service/NatalChartReadings": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/NatalChartReadings-54d8bc2c251aeb13.js"
+      "static/chunks/pages/service/NatalChartReadings-13e99714de95c5a9.js"
     ],
     "/service/NumerologyConsultations": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/NumerologyConsultations-5fed58a1aa19df3b.js"
+      "static/chunks/pages/service/NumerologyConsultations-0262b2ee76f51b4b.js"
     ],
     "/service/PastLifeRegression": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/PastLifeRegression-240d6c25af902beb.js"
+      "static/chunks/pages/service/PastLifeRegression-bb71241f357912a8.js"
     ],
     "/service/TarotCardReadings": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
-      "static/chunks/pages/service/TarotCardReadings-1993e9a63c49fbf9.js"
+      "static/chunks/pages/service/TarotCardReadings-7f4c2a6c30b62dcd.js"
     ],
     "/services": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
       "static/chunks/395-bc93abaa72093e83.js",
-      "static/chunks/pages/services-30213d739b6b073b.js"
+      "static/chunks/pages/services-42c1936f872906bb.js"
     ],
     "/success": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
-      "static/chunks/pages/success-f57aa73a1ffb924d.js"
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
+      "static/chunks/pages/success-6764d6befa03a27c.js"
     ],
     "/userProfile": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
-      "static/chunks/pages/userProfile-454f9647d75803b7.js"
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
+      "static/chunks/pages/userProfile-202d2c73541dc620.js"
     ],
     "/yourCart": [
-      "static/chunks/webpack-89934714399aedca.js",
-      "static/chunks/framework-63d16ff2f5e08230.js",
-      "static/chunks/main-a5a99d988add279a.js",
+      "static/chunks/webpack-f0f37d902f33c72f.js",
+      "static/chunks/488-f4badbf7c0f2c927.js",
+      "static/chunks/main-23c974fc5dcbe4d9.js",
       "static/chunks/61-6514875cd800badd.js",
       "static/chunks/395-bc93abaa72093e83.js",
-      "static/chunks/pages/yourCart-edf8be04f1f0fcca.js"
+      "static/chunks/pages/yourCart-0079a8cf598253e1.js"
     ]
   },
   "ampFirstPages": []
