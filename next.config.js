@@ -1,16 +1,15 @@
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+}
+// module.exports = {
+//   images: {
+//     domains: ['via.placeholder.com'],
+//   },
+// };
+// module.exports = nextConfig
 module.exports = {
-  distDir: 'dist',
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      // Analyze bundles
-      config.plugins.push(new BundleAnalyzerPlugin());
-    }
-    config.optimization.splitChunks = {
-      chunks: 'all',
-      maxSize: 24400000, // Just under 25 MiB
-    };
-    return config;
+  images: {
+    domains: ['via.placeholder.com'],
   },
 };
