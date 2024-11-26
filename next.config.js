@@ -10,6 +10,8 @@ const nextConfig = {
 // module.exports = nextConfig
 module.exports = {
   images: {
+    distDir: 'dist', // Set the output directory to 'dist'
     domains: ['via.placeholder.com'],
   },
 };
+
